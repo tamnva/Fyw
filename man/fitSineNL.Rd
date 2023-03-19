@@ -5,18 +5,18 @@
 \title{Fit a nonlinear sine wave function}
 \usage{
 fitSineNL(
-  c = NULL,
+  obsC = NULL,
   a = c(0, 5),
   phi = c(0, 2 * pi),
   k = c(-20, -10),
   t = NULL,
   nIter = 10000,
   nBestIter = 100,
-  weights = rep(1, length(c))
+  weights = rep(1, length(obsC))
 )
 }
 \arguments{
-\item{c}{A numeric vectors containing values of the dependent variables, this
+\item{obsC}{A numeric vectors containing values of the dependent variables, this
 could be measure isotope concentration in precipitation (or streamflow).}
 
 \item{phi}{A numeric vector, representing the maximum and minimum search range
@@ -41,7 +41,7 @@ Fit a nonlinear sine wave function
 }
 \details{
 Fitting non linear sine function of the following form: \cr
-y = a \cdot sin(2 \cdot pi \cdot t - phi) + k
+y = a * sin(2 * pi * t - phi) + k
 }
 \examples{
 fitSineNonLinear(y = runif(10), t = runif(10))

@@ -13,7 +13,7 @@
 #' @param t A date (or character) vector in format format yyyy-mm-dd
 #' (e.g., 2020-12-31)representing the date of observed isotope concentrations
 #' @details Fitting non linear sine function of the following form: \cr
-#' y = a \cdot sin(2 \cdot pi \cdot t - phi) + k
+#' y = a * sin(2 * pi * t - phi) + k
 #' @return A list of object
 #' @seealso
 #' toDecimal, randomLHS
@@ -21,8 +21,7 @@
 #' fitSineNonLinear(y = runif(10), t = runif(10))
 
  fitSineNL <- function(obsC = NULL, a = c(0,5), phi = c(0, 2*pi), k = c(-20,-10),
-                       t = NULL, nIter = 10000, nBestIter = 100,
-                       weights = rep(1, length(obsC))){
+                       t = NULL, nIter = 10000, nBestIter = 100, weights = rep(1, length(obsC))){
 
    # Output as list object
    output <- list()
@@ -47,8 +46,9 @@
    parameterSet$k <- k[1] +  parameterSet$k * (k[2] - k[1])
 
    # Conver t to decimal number range
-   t <- lubridate :: decimal_date(as.Date(t, format = "%Y-%m-%d"))
-   t <- t - trunc(t)
+   t <- as.Date(t, format = "%Y-%m-%d")
+   tDecimal <- lubridate :: decimal_date(t)
+   tDecimal <- tDecimal - trunc(tDecimal)
 
    # Initial the weighted least square value
    weightedLeastSquare <- c()
@@ -57,8 +57,7 @@
    for (i in 1:nIter){
 
      # Calculate the predict isotope concentration
-     cPredicted <- parameterSet$a[i] * sin(2*pi*t - parameterSet$phi[i])
-     + parameterSet$k[i]
+     cPredicted <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
 
      # Calculate sum or square error (with weights)
      weightedLeastSquare <- c(weightedLeastSquare,
@@ -72,31 +71,22 @@
    # Return the best nBestIter
    predictedC <- c()
    simulation <- c()
-   performance <- c()
+   r2 <- c()
 
    for (i in 1:nBestIter){
-     predictedVariable <- parameterSet$a[i] * sin(2*pi*t - parameterSet$phi[i]) + parameterSet$k[i]
+     predictedVariable <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
      predictedC <- c(predictedC, predictedVariable)
-     simulation <- c(simulation, rep(paste0("simulation_",i)), length(c))
-     weightedLeastSquare <-  weightedLeastSquare[sortDecreasing[i]]
-     r2 <- cor(x = obsC, y =  predictedVariable)^2
-
-     if (i == 1) {
-       performance <- data.frame(simulation = paste0("simulation_",i),#
-                                weightedLeastSquare = weightedLeastSquare,
-                                r2 = r2)
-     } else {
-       performance <- rbind(performance, c(paste0("simulation_",i),weightedLeastSquare, r2))
-     }
-
+     simulation <- c(simulation, rep(paste0("simulation_",i), length(obsC)))
+     r2 <- c(r2, cor(x = obsC, y =  predictedVariable)^2)
    }
 
-   output$predictedC <- tibble::tibble(date = rep(t,nBestIter),
-                                       predictedC = predictedC,
-                                       simulation = simulation)
-   output$performance <- tibble::as_tibble(performance)
-   output$parameter <- tibble::as.tibble(cbind(data.frame(simulation = c(1:nBestIter)),
-                                               parameterSet[1:nBestIter, ]))
+   output$predictedC <- data.frame(date = rep(t,nBestIter),predictedC = predictedC,
+                                   simulation = simulation)
+   output$performance <- data.frame(simulation = unique(simulation), weightedLeastSquare =
+                                      weightedLeastSquare[sortDecreasing[1:nBestIter]],
+                                    r2 = r2)
+   output$parameter <- data.frame(cbind(data.frame(simulation = c(1:nBestIter)),
+                                        parameterSet[1:nBestIter, ]))
 
    # Return output
    return(output)
