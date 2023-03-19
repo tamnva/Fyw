@@ -31,7 +31,6 @@
 #' properties across 22 Swiss catchments, Hydrol. Earth Syst. Sci., 22,
 #' 3841–3861, https://doi.org/10.5194/hess-22-3841-2018-supplement.
 #'
-#' @seealso
 #'
 #' @examples
 #' # Explanatory variables
@@ -114,7 +113,7 @@ IRLS <- function(Y, X, pweights = rep(1,length(Y)), iweights = rep(1,length(Y)),
 
   wwwt <- pweights*iweights
 
-  fit <- lm(Y ~ X, weights=wwwt, na.action="na.omit") #initial least-squares fit
+  fit <- lm(Y ~ X, weights = wwwt, na.action = "na.omit") #initial least-squares fit
 
   wt_chg <- 999.0 #initialize weight change
   iter <- 0 #initialize the iteration counter
