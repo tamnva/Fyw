@@ -18,7 +18,8 @@
 #' @seealso
 #' toDecimal, randomLHS
 #' @examples
-#' fitSineNonLinear(y = runif(10), t = runif(10))
+#' fitSineNL(y = runif(10), t = runif(10))
+#' @export
 
  fitSineNL <- function(obsC = NULL, a = c(0,5), phi = c(0, 2*pi), k = c(-20,-10),
                        t = NULL, nIter = 10000, nBestIter = 100, weights = rep(1, length(obsC))){

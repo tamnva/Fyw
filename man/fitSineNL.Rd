@@ -44,7 +44,7 @@ Fitting non linear sine function of the following form: \cr
 y = a * sin(2 * pi * t - phi) + k
 }
 \examples{
-fitSineNonLinear(y = runif(10), t = runif(10))
+fitSineNL(y = runif(10), t = runif(10))
 }
 \seealso{
 toDecimal, randomLHS

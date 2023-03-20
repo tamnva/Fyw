@@ -3,6 +3,10 @@
 \name{IRLS}
 \alias{IRLS}
 \title{Iteratively reweighted least squares (IRLS) with optional point weights}
+\source{
+The IRLS used in this function was copied and modified from the code
+provided in this link https://doi.org/10.5194/hess-22-3841-2018-supplement.
+}
 \usage{
 IRLS(
   Y,
