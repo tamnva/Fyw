@@ -6,12 +6,12 @@
 \usage{
 fitSineNL(
   obsC = NULL,
-  a = c(0, 5),
+  a = c(0, 10),
   phi = c(0, 2 * pi),
-  k = c(-20, -10),
+  k = c(-20, 0),
   t = NULL,
-  nIter = 10000,
-  nBestIter = 100,
+  nIter = 50000,
+  nBestIter = 30,
   weights = rep(1, length(obsC))
 )
 }

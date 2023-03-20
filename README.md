@@ -65,3 +65,6 @@ fitSineQ$parameter
 ```
 
 4. Youngwater fraction
+``` r
+fitSineQ$parameter$a/fitSineP$parameter$a
+```
