@@ -6,7 +6,7 @@
 #' phiP MUST be within the range of [0, 2*pi]
 #' @param phiS Phase shift of isotope concentration in streamflow (in radian). \cr
 #' phiS MUST be within the range of [0, 2*pi] \cr
-#' phiS MUST be smaller than phiP
+#' phiS MUST be smaller than phiP (will be automatically checked inside this function)
 #' @param Fyw Youngwater fraction, equals to the amplitude ratio AS/AP where AS
 #' and AP are the amplitudes of the fitted sine wave to isotope concentrations in
 #' streamflow and in precipitation, respectively.

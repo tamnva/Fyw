@@ -9,7 +9,7 @@ findAlphaBeta(phiS = NULL, phiP = NULL, Fyw = NULL, eps = 1e-06)
 \arguments{
 \item{phiS}{Phase shift of isotope concentration in streamflow (in radian). \cr
 phiS MUST be within the range of [0, 2*pi] \cr
-phiS MUST be smaller than phiP}
+phiS MUST be smaller than phiP (will be automatically checked inside this function)}
 
 \item{phiP}{Phase shift of isotope concentration in precipitation (in radian).
 phiP MUST be within the range of [0, 2*pi]}
