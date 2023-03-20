@@ -4,7 +4,7 @@
 \alias{findtauyw}
 \title{Find findtauyw using bisection approach}
 \usage{
-findtauyw(alpha = NULL, beta = NULL, Fyw = NULL)
+findtauyw(alpha = NULL, beta = NULL, Fyw = NULL, eps = 1e-06)
 }
 \arguments{
 \item{alpha}{Shape factor of the gamma distribution}
@@ -15,6 +15,10 @@ phiS MUST be smaller than phiP}
 \item{Fyw}{Youngwater fraction, equals to the amplitude ratio AS/AP where AS
 and AP are the amplitudes of the fitted sine wave to isotope concentrations in
 streamflow and in precipitation, respectively.}
+
+\item{eps}{The minimum search distance, default value is 1e-6. In other words,
+if the next tauyw values changes within this range compared to the previous value
+the function will stop and return the next tauyw value}
 }
 \value{
 Return the age threshold of youngwater fraction tauyw in years.
