@@ -89,6 +89,7 @@
                                     r2 = r2)
    output$parameter <- data.frame(cbind(data.frame(simulation = c(1:nBestIter)),
                                         parameterSet[1:nBestIter, ]))
+   output$observed <- data.frame(date = t, obsC = obsC)
 
    # Return output
    return(output)
