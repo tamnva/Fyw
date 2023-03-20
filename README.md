@@ -3,8 +3,6 @@
 
 ## Quick Start!
 
-**Next time** when you use this app just **step 4** is needed **or you can download the latest app and run it using the following commands**
-
     # Install devtools package
     install.packages("devtools")
     library(devtools)
