@@ -1,14 +1,14 @@
 #' Find findtauyw using bisection approach
 #'
-#' @param shape Shape factor (or alpha) of the gamma distribution
-#' @param scale Scale factor (or beta) of the gamma distribution
+#' @param alpha Shape factor of the gamma distribution
+#' @param beta Scale factor of the gamma distribution
 #' phiS MUST be smaller than phiP
 #' @param Fyw Youngwater fraction, equals to the amplitude ratio AS/AP where AS
 #' and AP are the amplitudes of the fitted sine wave to isotope concentrations in
 #' streamflow and in precipitation, respectively.
 #' @return Return the age threshold of youngwater fraction tauyw in years.
 #' @details In this function, we solve equation 13 (Kirchner et al., 2013) with
-#' given shape (alpha), scale (beta), and youngwater fraction (Fyw). The result is
+#' given alpha (shape), beta (scale), and youngwater fraction (Fyw). The result is
 #' the age threshold of youngwater fraction (tauyw) in years
 #' @references
 #' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
@@ -16,19 +16,19 @@
 #' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
 #' https://doi.org/10.5194/hess-20-279-2016.
 #' @examples
-#' findtauyw(shape = 1.0, scale = 2.0, Fyw = 0.25)
+#' findtauyw(alpha = 1.0, beta = 2.0, Fyw = 0.25)
 #' @export
 
-findtauyw <- function(shape = NULL, scale = NULL, Fyw = NULL){
+findtauyw <- function(alpha = NULL, beta = NULL, Fyw = NULL){
 
-  # check shape factor is null
-  if (is.null(shape)){
-    stop("shape factor cannot be NULL")
+  # check alpha factor is null
+  if (is.null(alpha)){
+    stop("alpha factor cannot be NULL")
   }
 
-  # check if scale factor is null
-  if (is.null(scale)){
-    stop("scale factor cannot be NULL")
+  # check if beta factor is null
+  if (is.null(beta)){
+    stop("beta factor cannot be NULL")
   }
 
   # check if Fyw is null
@@ -43,7 +43,7 @@ findtauyw <- function(shape = NULL, scale = NULL, Fyw = NULL){
 
   # define function need to be found the root
   f <- function(tauyw){
-    pgamma(tauyw, shape = shape, scale = scale, lower = TRUE) - Fyw
+    pgamma(tauyw, alpha = alpha, beta = beta, lower = TRUE) - Fyw
   }
 
   tauywMin <- 0
