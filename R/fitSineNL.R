@@ -21,8 +21,9 @@
 #' fitSineNL(y = runif(10), t = runif(10))
 #' @export
 
- fitSineNL <- function(obsC = NULL, a = c(0,5), phi = c(0, 2*pi), k = c(-20,-10),
-                       t = NULL, nIter = 10000, nBestIter = 100, weights = rep(1, length(obsC))){
+ fitSineNL <- function(obsC = NULL, a = c(0,10), phi = c(0, 2*pi), k = c(-20,0),
+                       t = NULL, nIter = 50000, nBestIter = 30,
+                       weights = rep(1, length(obsC))){
 
    # Output as list object
    output <- list()
