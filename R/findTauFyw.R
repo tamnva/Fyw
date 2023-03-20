@@ -6,6 +6,9 @@
 #' @param Fyw Youngwater fraction, equals to the amplitude ratio AS/AP where AS
 #' and AP are the amplitudes of the fitted sine wave to isotope concentrations in
 #' streamflow and in precipitation, respectively.
+#' @param eps The minimum search distance, default value is 1e-6. In other words,
+#' if the next tauyw values changes within this range compared to the previous value
+#' the function will stop and return the next tauyw value
 #' @return Return the age threshold of youngwater fraction tauyw in years.
 #' @details In this function, we solve equation 13 (Kirchner et al., 2013) with
 #' given alpha (shape), beta (scale), and youngwater fraction (Fyw). The result is
@@ -19,7 +22,7 @@
 #' findtauyw(alpha = 1.0, beta = 2.0, Fyw = 0.25)
 #' @export
 
-findtauyw <- function(alpha = NULL, beta = NULL, Fyw = NULL){
+findtauyw <- function(alpha = NULL, beta = NULL, Fyw = NULL, eps = 1e-6){
 
   # check alpha factor is null
   if (is.null(alpha)){
@@ -43,7 +46,7 @@ findtauyw <- function(alpha = NULL, beta = NULL, Fyw = NULL){
 
   # define function need to be found the root
   f <- function(tauyw){
-    pgamma(tauyw, alpha = alpha, beta = beta, lower = TRUE) - Fyw
+    pgamma(tauyw, shape = alpha, scale = beta, lower = TRUE) - Fyw
   }
 
   tauywMin <- 0
