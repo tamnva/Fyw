@@ -150,7 +150,7 @@ ggplot()+
   geom_line(aes(x = isotopeS$date, y = as.numeric(fitSineStr$fitted.values), color = "Fitted line"))+
   geom_point(data = isotopeS, aes(x = date, y = O18, color = "observed"))+
   scale_color_manual(values = c("Fitted line" = "red","observed" = "black"))+
-  labs(x = "", y = "O18 concentrations in precipitation", color = "")+
+  labs(x = "", y = "O18 concentrations in streamflow", color = "")+
   theme(legend.position = "top")
   
   
