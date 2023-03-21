@@ -24,15 +24,15 @@ Fyw <- function(AP = NULL, phiP = NULL, AS = NULL, phiS = NULL){
   if(all(is.na(phiS))) stop("phiS cannot contain missing values")
 
   # Check length
-  if(length(AP)/length(phiP)) stop("AP and phiP must have the same length")
-  if(length(AS)/length(phiS)) stop("AS and phiS must have the same length")
+  if(length(AP)/length(phiP) != 1) stop("AP and phiP must have the same length")
+  if(length(AS)/length(phiS) != 1) stop("AS and phiS must have the same length")
 
   # Combine different AP, phiP, AS, and phiS to get Fyw
   output <- data.frame(AP = NA, phiP = NA,
                        AS = NA, phiS = NA,
                        Fyw = NA, alpha = NA,
-                       beta = NA, meanTT = NA,
-                       pair_P_S = NA)
+                       beta = NA, meanTT_year = NA,
+                       P = NA, S = NA)
 
   for (i in 1:length(AS)){
     for (j in 1:length(AP)){
@@ -41,15 +41,22 @@ Fyw <- function(AP = NULL, phiP = NULL, AS = NULL, phiS = NULL){
         # Now find Fyw and other parameters
         Fyw = AS[i]/AP[j]
         temp <- findAlphaBeta(phiS = phiS[i], phiP = phiP[j], Fyw = Fyw)
-        output <- rbind(output, c(AP[j],phiP[j],AS[i],phiS[i], Fyw, temp$alpha,
-                                  temp$beta, temp$meanTT, paste0(j,"_",i)))
+        output <- rbind(output, c(round(AP[j], 3),round(phiP[j], 3),
+                                  round(AS[i], 3),round(phiS[i], 3),
+                                  round(Fyw, 3), round(temp$alpha, 3),
+                                  round(temp$beta, 3), round(temp$meanTT, 3),
+                                  P = j, S = i))
       } else {
-        print("Cannot find Fyw for the following inputs")
-        print(paste("phiS = ", phiS[i], ", phiP = ", phiP[i],
-                    ", AS = ", AS[i], ", AP = ", AP[i]))
+        print("Warning: Cannot find Fyw for the following inputs")
+        print(paste("phiS = ", round(phiS[i],3), ", phiP = ", round(phiP[i],3),
+                    ", AS = ", round(AS[i],3), ", AP = ", round(AP[i],3)))
       }
     }
   }
 
+  # Print output message
+  print("Successful done")
+
+  # Return output
   return(output[-c(1),])
 }

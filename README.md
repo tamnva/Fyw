@@ -52,7 +52,7 @@ fitSineP$parameter
 ``` r
 fitSineS <- fitSineNL(obsC = isotopeS$O18, a = c(0,10), phi = c(0, 2*pi),
                       k = c(-20,0), t = isotopeS$date, nIter = 50000,
-                      nBestIter = 10, weights = isotopeS$precippitation_mm)
+                      nBestIter = 10, weights = isotopeS$streamflow_mm)
 
 ggplot(fitSineS$predictedC)+
   geom_line(aes(x = date, y = predictedC, color = simulation))+
