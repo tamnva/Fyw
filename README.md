@@ -66,5 +66,6 @@ fitSineS$parameter
 
 4. Youngwater fraction
 ``` r
-fitSineS$parameter$a/fitSineP$parameter$a
+Fyw_weighted <- Fyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
+                    AS = fitSineS$parameter$a, phiS = fitSineS$parameter$phi)
 ```
