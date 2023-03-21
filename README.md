@@ -18,20 +18,29 @@ detach("package:Fyw", unload = TRUE)
 
 # Install Fyw package for github
 install_github("tamnva/Fyw")
-library(Fyw)
 ```
 
-## 3. Approach 1: Fyw estimated using non-linear sine wave fitting
-The fitted sine wave is: $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$ where $a$, $phi$, and $k$ are parameters need to be estimated. In this approach, user need to be checked if there is outlier in the observed data and remove beforehand.
-
-### 3.1. Example data set
+### 3. Example dataset (included in Fyw packaage)
 These data are isotope (O18) concentrations in precipitation and streamflow
 
 ``` r
+# Load Fyw package
+library(Fyw)
+
+# Example dataset
 ?isotopeP
 ?isotopeS
+
+# Other packages to run the example Rscript 
+library(ggplot2)
+library(lubridate)
 ```
-### 3.2. Fit observed O18 in precipitation to sine wave function
+
+## 4. Approach 1: Fyw estimated using non-linear sine wave fitting
+The fitted sine wave is: $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$ where $a$, $phi$, and $k$ are parameters need to be estimated. In this approach, user need to be checked if there is outlier in the observed data and remove beforehand.
+
+
+### 4.1. Fit observed O18 in precipitation to sine wave function
 
 ``` r
 fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(0,10), phi = c(0, 2*pi),
@@ -41,7 +50,6 @@ fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(0,10), phi = c(0, 2*pi),
 # remove 'weights = isotopeP$precippitation_mm' for unweighted Fyw
 
 # Plot observed isotope in precipitation and the fitted sine wave
-library(ggplot2)
 ggplot(fitSineP$predictedC)+
   geom_line(aes(x = date, y = predictedC, color = simulation))+
   geom_point(data = fitSineP$observed, aes(x = date, y = obsC), size = 0.75)+
@@ -52,7 +60,7 @@ ggplot(fitSineP$predictedC)+
 fitSineP$parameter
 ```
 
-### 3.3. Fit observed O18 in streamflow to sine wave function
+### 4.2. Fit observed O18 in streamflow to sine wave function
 
 ``` r
 fitSineS <- fitSineNL(obsC = isotopeS$O18, a = c(0,10), phi = c(0, 2*pi),
@@ -71,7 +79,7 @@ ggplot(fitSineS$predictedC)+
 fitSineS$parameter
 ```
 
-### 3.4. Youngwater fraction (weighted) associated values
+### 4.3. Youngwater fraction (weighted) associated values
 Note: To get the Fyw (unweighted) just remove the ```weights``` variables while fitting fitSineP and fitSineS as mentioned in the code above. Now we have different fitted parameters while fitting the sine wave function to isotope concentrations in  precipitation (P) and streamflow (S). We can have different combinations of these fitted parameters to have different Fyw values. This can be done with the ```Fyw``` function.
 
 ``` r
@@ -81,18 +89,25 @@ Fyw <- findFyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
 
 # Example of finding the age threshold
 tauyw <- findtauyw(alpha = Fyw$alpha, beta = Fyw$beta, Fyw = Fyw$Fyw)
+
+# Plot results
+ggplot(stack(tauyw), aes(y = values, fill=ind)) +
+  geom_boxplot(alpha = 0.5)+
+  facet_wrap(~ind, scales="free_y", ncol = 4)+
+  xlab("") + ylab("") + 
+  theme(legend.position = "none", 
+        axis.ticks.x = element_blank(), 
+        axis.text.x = element_blank())
 ```
 Note: The values ```Fyw$P[i]``` and ```Fyw$P[i]``` indicate that ```Fyw$Fyw[i]``` and their associates values (e.g, beta, alpha,...) are estimated from the input combination ```AP[Fyw$P[i]]``` and ```phiP[Fyw$P[i]]``` with ```AS[Fyw$P[i]]``` and ```phiS[Fyw$P[i]]```, which are also given in the ```Fyw``` data frame. 
 
-## 4. Approach 2: Fyw estimated using linear sine wave fitting 
+## 5. Approach 2: Fyw estimated using linear sine wave fitting 
 The fitted sine wave is: $c = a \cdot cos(2 \cdot \pi \cdot t) + b \cdot sin(2 \cdot \pi \cdot t) + k$ where $a$, $b$, and $k$ are parameters need to be estimated. In this approach, we use the Iteratively reweighted least squares (IRLS) approach, which can help in limiting the influence of outiler (Kirchner, 2016).
 
-### 4.1. Fit observed O18 in precipitation to sine wave function
+### 5.1. Fit observed O18 in precipitation to sine wave function
 
 ``` r
-# Load require package and convert data to decimal date
-library(lubridate)
-
+# Convert data to decimal date
 tP <-  decimal_date(isotopeP$date)
 tP <- tP - trunc(tP)
 tS <-  decimal_date(isotopeS$date)
@@ -105,6 +120,14 @@ fitSinePre <- IRLS(Y = isotopeP$O18,
 
 # NOTE: remove 'pweights = isotopeP$precippitation_mm' for unweighted Fyw
 
+# Plot fitted sine wave
+ggplot()+
+  geom_line(aes(x = isotopeP$date, y = as.numeric(fitSinePre$fitted.values), color = "Fitted line"))+
+  geom_point(data = isotopeP, aes(x = date, y = O18, color = "observed"))+
+  scale_color_manual(values = c("Fitted line" = "red","observed" = "black"))+
+  labs(x = "", y = "O18 concentrations in precipitation", color = "")+
+  theme(legend.position = "top")
+  
 # Get amplitude and phase shift
 aP <- fitSinePre$coefficients[2]
 bP <- fitSinePre$coefficients[3]
@@ -112,7 +135,7 @@ AP <- sqrt(sum(aP^2 + bP^2))
 phiP <- atan(bP/aP)
 ```
 
-### 4.2. Fit observed O18 in precipitation to sine wave function
+### 5.2. Fit observed O18 in precipitation to sine wave function
 
 ``` r
 # Fit to sine wave function
@@ -122,13 +145,22 @@ fitSineStr <- IRLS(Y = isotopeS$O18,
 
 # NOTE: remove 'pweights = isotopeS$streamflow_mm' for unweighted Fyw
 
+# Plot fitted sine wave
+ggplot()+
+  geom_line(aes(x = isotopeS$date, y = as.numeric(fitSineStr$fitted.values), color = "Fitted line"))+
+  geom_point(data = isotopeS, aes(x = date, y = O18, color = "observed"))+
+  scale_color_manual(values = c("Fitted line" = "red","observed" = "black"))+
+  labs(x = "", y = "O18 concentrations in precipitation", color = "")+
+  theme(legend.position = "top")
+  
+  
 # Get amplitude and phase shift
 aS <- fitSineStr$coefficients[2]
 bS <- fitSineStr$coefficients[3]
 AS <- sqrt(sum(aS^2 + bS^2))
 phiS <- atan(bS/aS)
 ```
-### 4.3. Find the youngwater fraction and associated values
+### 5.3. Find the youngwater fraction and associated values
 
 ``` r
 # Youngwater fraction (weighted)
@@ -138,6 +170,10 @@ Fyw_new <- findFyw(AP = AP, phiP = phiP,
 # Age theshold of Fyw_new
 tauyw_new <- findtauyw(alpha = Fyw_new$alpha, beta = Fyw_new$beta,
                        Fyw = Fyw_new$Fyw)
+
+# Uncertainty estimation
+# TODO?
+
 
 ```
 
