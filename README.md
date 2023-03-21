@@ -39,8 +39,8 @@ fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(0,10), phi = c(0, 2*pi),
 library(ggplot2)
 ggplot(fitSineP$predictedC)+
   geom_line(aes(x = date, y = predictedC, color = simulation))+
-  geom_point(data = fitSineP$observed, aes(x = date, y = obsC))+
-  scale_y_continuous(limits = c(-30,10))+
+  geom_point(data = fitSineP$observed, aes(x = date, y = obsC), size = 0.75)+
+  scale_y_continuous(limits = c(-30,10))+ylab("precipitation O18 concentration")+
   theme(legend.position = "none")
   
 # Fitted parameters (top nBestIter)
@@ -56,8 +56,8 @@ fitSineQ <- fitSineNL(obsC = isotopeQ$O18, a = c(0,10), phi = c(0, 2*pi),
 
 ggplot(fitSineQ$predictedC)+
   geom_line(aes(x = date, y = predictedC, color = simulation))+
-  geom_point(data = fitSineQ$observed, aes(x = date, y = obsC))+
-  scale_y_continuous(limits = c(-30,10))+
+  geom_point(data = fitSineQ$observed, aes(x = date, y = obsC), size = 0.75)+
+  scale_y_continuous(limits = c(-30,10))+ ylab("instream O18 concentration")+
   theme(legend.position = "none")
   
 # Fitted parameters (top nBestIter)
