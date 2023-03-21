@@ -1,5 +1,5 @@
 # Fyw
-[![R-CMD-check](https://github.com/tamnva/Fyw/workflows/R-CMD-check/badge.svg)](https://github.com/tamnva/Fyw/actions)
+[![R-CMD-check](https://github.com/tamnva/Fyw/workflows/R-CMD-check/badge.svg)](https://github.com/tamnva/Fyw/actions) [![DOI](https://zenodo.org/badge/615738927.svg)](https://zenodo.org/badge/latestdoi/615738927)
 
 ## 1. Overview
 
