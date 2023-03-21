@@ -1,10 +1,11 @@
 # Fyw
+[![R-CMD-check](https://github.com/tamnva/Fyw/workflows/R-CMD-check/badge.svg)](https://github.com/tamnva/Fyw/actions)
 
-## Overview
+## 1. Overview
 
 - Fyw package provides several functions for finding the youngwater fraction and its related parameters (e.g., alpha, beta of the gamma distribution, age threshold of the youngwater fraction)
 
-## Installation
+## 2. Installation
 
 ``` r
 
@@ -20,15 +21,17 @@ install_github("tamnva/Fyw")
 library(Fyw)
 ```
 
-## Usage
+## 3. Approach 1: Fyw estimated using non-linear sine wave fitting
+The fitted sine wave is: $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$ where $a$, $phi$, and $k$ are parameters need to be estimated. In this approach, user need to be checked if there is outlier in the observed data and remove beforehand.
 
-1. Example data set
+### 3.1. Example data set
+These data are isotope (O18) concentrations in precipitation and streamflow
 
 ``` r
 ?isotopeP
 ?isotopeS
 ```
-2. Fit observed O18 in precipitation to sine wave function in form (weighted with precipatation volume): $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$
+### 3.2. Fit observed O18 in precipitation to sine wave function
 
 ``` r
 fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(0,10), phi = c(0, 2*pi),
@@ -49,7 +52,7 @@ ggplot(fitSineP$predictedC)+
 fitSineP$parameter
 ```
 
-3. Fit observed O18 in streamflow to sine wave function in form (flow weighted): $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$
+### 3.3. Fit observed O18 in streamflow to sine wave function
 
 ``` r
 fitSineS <- fitSineNL(obsC = isotopeS$O18, a = c(0,10), phi = c(0, 2*pi),
@@ -68,19 +71,27 @@ ggplot(fitSineS$predictedC)+
 fitSineS$parameter
 ```
 
-4. Youngwater fraction (weighted). To get the Fyw (unweighted) just remove the ```weights``` variables while fitting fitSineP and fitSineS as mentioned in the code above. Now we have different fitted parameters while fitting the sine wave function to isotope concentrations in  precipitation (P) and streamflow (S). We can have different combinations of these fitted parameters to have different Fyw values. This can be done with the ```Fyw``` function.
+### 3.4. Youngwater fraction (weighted) 
+Note: To get the Fyw (unweighted) just remove the ```weights``` variables while fitting fitSineP and fitSineS as mentioned in the code above. Now we have different fitted parameters while fitting the sine wave function to isotope concentrations in  precipitation (P) and streamflow (S). We can have different combinations of these fitted parameters to have different Fyw values. This can be done with the ```Fyw``` function.
+
 ``` r
 Fyw <- findFyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
-                    AS = fitSineS$parameter$a, phiS = fitSineS$parameter$phi)
+               AS = fitSineS$parameter$a, phiS = fitSineS$parameter$phi)
 
 ```
 Note: The values ```Fyw$P[i]``` and ```Fyw$P[i]``` indicate that ```Fyw$Fyw[i]``` and their associates values (e.g, beta, alpha,...) are estimated from the input combination ```AP[Fyw$P[i]]``` and ```phiP[Fyw$P[i]]``` with ```AS[Fyw$P[i]]``` and ```phiS[Fyw$P[i]]```, which are also given in the ```Fyw``` data frame. 
 
-5. Find the age threshold (unit in years)
+### 3.5. Find the age threshold (unit in years)
 ``` r
 # Example of finding the age threshold
 tauyw <- findtauyw(alpha = Fyw$alpha, beta = Fyw$beta, Fyw = Fyw$Fyw)
 ```
+## 4. Approach 2: Fyw estimated using linear sine wave fitting 
+The fitted sine wave is: $c = a \cdot sin(2 \cdot \pi \cdot t) + b \cdot sin(2 \cdot \pi \cdot t) + k$ where $a$, $b$, and $k$ are parameters need to be estimated. In this approach, we use the Iteratively reweighted least squares (IRLS) approach, which can help in limiting the influence of outiler (Kirchner, 2016).
 
+``` r
+# Add code here
+
+```
 
 
