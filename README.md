@@ -87,11 +87,61 @@ Note: The values ```Fyw$P[i]``` and ```Fyw$P[i]``` indicate that ```Fyw$Fyw[i]``
 tauyw <- findtauyw(alpha = Fyw$alpha, beta = Fyw$beta, Fyw = Fyw$Fyw)
 ```
 ## 4. Approach 2: Fyw estimated using linear sine wave fitting 
-The fitted sine wave is: $c = a \cdot sin(2 \cdot \pi \cdot t) + b \cdot sin(2 \cdot \pi \cdot t) + k$ where $a$, $b$, and $k$ are parameters need to be estimated. In this approach, we use the Iteratively reweighted least squares (IRLS) approach, which can help in limiting the influence of outiler (Kirchner, 2016).
+The fitted sine wave is: $c = a \cdot cos(2 \cdot \pi \cdot t) + b \cdot sin(2 \cdot \pi \cdot t) + k$ where $a$, $b$, and $k$ are parameters need to be estimated. In this approach, we use the Iteratively reweighted least squares (IRLS) approach, which can help in limiting the influence of outiler (Kirchner, 2016).
+
+### 4.1. Fit observed O18 in precipitation to sine wave function
 
 ``` r
-# Add code here
+# Load require package and convert data to decimal date
+library(lubridate)
+
+tP <-  decimal_date(isotopeP$date)
+tP <- tP - trunc(tP)
+tS <-  decimal_date(isotopeS$date)
+tS <- tS - trunc(tS)
+
+# Fit to sine wave function
+fitSinePre <- IRLS(Y = isotopeP$O18,
+                   X = data.frame(cos = cos(2*pi*tP),  sin = sin(2*pi*tP)),
+                   pweights = isotopeP$precippitation_mm)
+
+# NOTE: remove 'pweights = isotopeP$precippitation_mm' for unweighted Fyw
+
+# Get amplitude and phase shift
+aP <- fitSinePre$coefficients[2]
+bP <- fitSinePre$coefficients[3]
+AP <- sqrt(sum(aP^2 + bP^2))
+phiP <- atan(bP/aP)
+```
+
+### 4.2. Fit observed O18 in precipitation to sine wave function
+
+``` r
+# Fit to sine wave function
+fitSineStr <- IRLS(Y = isotopeS$O18,
+                   X = data.frame(cos = cos(2*pi*tS),  sin = sin(2*pi*tS)),
+                   pweights = isotopeS$streamflow_mm)
+
+# NOTE: remove 'pweights = isotopeS$streamflow_mm' for unweighted Fyw
+
+# Get amplitude and phase shift
+aS <- fitSineStr$coefficients[2]
+bS <- fitSineStr$coefficients[3]
+AS <- sqrt(sum(aS^2 + bS^2))
+phiS <- atan(bS/aS)
+```
+### 4.3. Find the youngwater fraction and associated values
+
+``` r
+# Youngwater fraction (weighted)
+Fyw_new <- findFyw(AP = AP, phiP = phiP,
+                   AS = AS, phiS = phiS)
+
+# Age theshold of Fyw_new
+tauyw_new <- findtauyw(alpha = Fyw_new$alpha, beta = Fyw_new$beta,
+                       Fyw = Fyw_new$Fyw)
 
 ```
+
 
 

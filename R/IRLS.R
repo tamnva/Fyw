@@ -1,10 +1,10 @@
 #' Iteratively reweighted least squares (IRLS) with optional point weights
 #'
 #' @param Y A numeric vector representing a response variable
-#' @param X A numeric vector or array representing one or more explanatory variables.
-#'          If X is a numeric vector, X must have the same length as Y.
-#'          If X is an array, the first dimension of X mas have the same length
-#'          as Y. Y and X must not be exactly collinear. This is not checked.
+#' @param X A numeric vector or array or matrix representing one or more
+#' explanatory variables. If X is a numeric vector, X must have the same length
+#' as Y. If X is an array (or data frame), the first dimension of X mas have
+#' the same length as Y. Y and X must not be exactly collinear. This is not checked.
 #' @param pweights An optional numeric vector of point weights (such as masses for
 #'           mass-weighted regressions) the default weight vector gives all pweights
 #'           the value of 1
@@ -114,6 +114,9 @@ IRLS <- function(Y,
 
 
   wwwt <- pweights*iweights
+
+  # Convert to matrix if X is data frame
+  if(is.data.frame(X)) X <- data.matrix(X)
 
   fit <- lm(Y ~ X, weights = wwwt, na.action = "na.omit") #initial least-squares fit
 
