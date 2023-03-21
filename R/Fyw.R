@@ -47,7 +47,7 @@ Fyw <- function(AP = NULL, phiP = NULL, AS = NULL, phiS = NULL){
                                   round(temp$beta, 3), round(temp$meanTT, 3),
                                   P = j, S = i))
       } else {
-        print("Warning: Cannot find Fyw for the following inputs")
+        print("Warning: The following input combination was not used for Fyw estimation")
         print(paste("phiS = ", round(phiS[i],3), ", phiP = ", round(phiP[i],3),
                     ", AS = ", round(AS[i],3), ", AP = ", round(AP[i],3)))
       }
