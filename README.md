@@ -70,19 +70,16 @@ fitSineS$parameter
 
 4. Youngwater fraction (weighted). To get the Fyw (unweighted) just remove the ```weights``` variables while fitting fitSineP and fitSineS as mentioned in the code above. Now we have different fitted parameters while fitting the sine wave function to isotope concentrations in  precipitation (P) and streamflow (S). We can have different combinations of these fitted parameters to have different Fyw values. This can be done with the ```Fyw``` function.
 ``` r
-Fyw_weighted <- Fyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
+Fyw <- findFyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
                     AS = fitSineS$parameter$a, phiS = fitSineS$parameter$phi)
 
 ```
-Note: The values ```Fyw_weighted$P[i]``` and ```Fyw_weighted$P[i]``` indicate that ```Fyw_weighted$Fyw[i]``` and their associates values (e.g, beta, alpha,...) are estimated from the input combination ```AP[Fyw_weighted$P[1]]``` and ```phiP[Fyw_weighted$P[1]]``` with ```AS[Fyw_weighted$P[1]]``` and ```phiS[Fyw_weighted$P[1]]```, which are also given in the ```Fyw_weighted``` data frame. 
+Note: The values ```Fyw$P[i]``` and ```Fyw$P[i]``` indicate that ```Fyw$Fyw[i]``` and their associates values (e.g, beta, alpha,...) are estimated from the input combination ```AP[Fyw$P[i]]``` and ```phiP[Fyw$P[i]]``` with ```AS[Fyw$P[i]]``` and ```phiS[Fyw$P[i]]```, which are also given in the ```Fyw``` data frame. 
 
 5. Find the age threshold (unit in years)
 ``` r
 # Example of finding the age threshold
-findtauyw(alpha = 1.0, beta = 2.0, Fyw = 0.25)
-
-# This returns the value of 0.575 (years)
-# But from Fig. 10 (Kirchner, 2016) with alpha = 1 => tauyw = 0.19 (years)
+tauyw <- findtauyw(alpha = Fyw$alpha, beta = Fyw$beta, Fyw = Fyw$Fyw)
 ```
 
 

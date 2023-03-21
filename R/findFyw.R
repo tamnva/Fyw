@@ -19,10 +19,16 @@
 #' @seealso
 #' findAlphaBeta
 #' @examples
-#' Fyw(AP = runif(3), phiP = runif(3), AS = runif(4), phiS = runif(4))
+#' findFyw(AP = runif(3),
+#'         phiP = runif(3),
+#'         AS = runif(4),
+#'         phiS = runif(4))
 #' @export
 
-Fyw <- function(AP = NULL, phiP = NULL, AS = NULL, phiS = NULL){
+findFyw <- function(AP = NULL,
+                    phiP = NULL,
+                    AS = NULL,
+                    phiS = NULL){
 
   # Check null
   if (is.null(AP)) stop("AP cannot be null")

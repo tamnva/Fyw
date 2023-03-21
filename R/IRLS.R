@@ -64,7 +64,11 @@
 # code in this link https://doi.org/10.5194/hess-22-3841-2018-supplement.
 #-------------------------------------------------------------------------------
 
-IRLS <- function(Y, X, pweights = rep(1,length(Y)), iweights = rep(1,length(Y)), type = "Cauchy") {
+IRLS <- function(Y,
+                 X,
+                 pweights = rep(1,length(Y)),
+                 iweights = rep(1,length(Y)),
+                 type = "Cauchy") {
 
   # Bisquare weight function
   bisquare <- function(x, MAR) {

@@ -7,21 +7,20 @@
 findtauyw(alpha = NULL, beta = NULL, Fyw = NULL, eps = 1e-06)
 }
 \arguments{
-\item{alpha}{Shape factor of the gamma distribution}
+\item{alpha}{A scalar or vector of the shape factor of the gamma distribution}
 
-\item{beta}{Scale factor of the gamma distribution
+\item{beta}{A scalar or vector of the scale factor of the gamma distribution
 phiS MUST be smaller than phiP}
 
-\item{Fyw}{Youngwater fraction, equals to the amplitude ratio AS/AP where AS
-and AP are the amplitudes of the fitted sine wave to isotope concentrations in
-streamflow and in precipitation, respectively.}
+\item{Fyw}{A scalar or vector of the o the youngwater fraction}
 
 \item{eps}{The minimum search distance, default value is 1e-6. In other words,
 if the next tauyw values changes within this range compared to the previous value
 the function will stop and return the next tauyw value}
 }
 \value{
-Return the age threshold of youngwater fraction tauyw in years.
+Return a data frame object of the age threshold of youngwater fraction
+(tauyw) in years. This data frame also contains input.
 }
 \description{
 Find findtauyw using bisection approach
@@ -32,7 +31,9 @@ given alpha (shape), beta (scale), and youngwater fraction (Fyw). The result is
 the age threshold of youngwater fraction (tauyw) in years
 }
 \examples{
-findtauyw(alpha = 1.0, beta = 2.0, Fyw = 0.25)
+findtauyw(alpha = 1.0,
+          beta = 2.0,
+          Fyw = 0.25)
 }
 \references{
 Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal

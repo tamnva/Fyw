@@ -18,11 +18,23 @@
 #' @seealso
 #' toDecimal, randomLHS
 #' @examples
-#' fitSineNL(y = runif(10), t = runif(10))
+#' fitSineS <- fitSineNL(obsC = isotopeS$O18,
+#'                       a = c(0,10),
+#'                       phi = c(0, 2*pi),
+#'                       k = c(-20,0),
+#'                       t = isotopeS$date,
+#'                       nIter = 5000,
+#'                       nBestIter = 2,
+#'                       weights = isotopeS$streamflow_mm)
 #' @export
 
- fitSineNL <- function(obsC = NULL, a = c(0,10), phi = c(0, 2*pi), k = c(-20,0),
-                       t = NULL, nIter = 50000, nBestIter = 30,
+ fitSineNL <- function(obsC = NULL,
+                       a = c(0,10),
+                       phi = c(0, 2*pi),
+                       k = c(-20,0),
+                       t = NULL,
+                       nIter = 50000,
+                       nBestIter = 30,
                        weights = rep(1, length(obsC))){
 
    # Output as list object

@@ -32,7 +32,10 @@ distriubtion using the bisection approach. Solve equations (10) and (11) in
 Kirchner (2016).
 }
 \examples{
-result <- findAlphaBeta(phiS = 2*pi, phiP = pi, Fyw = 0.3, eps = 1e-6, maxIter = 1000)
+result <- findAlphaBeta(phiS = 2*pi,
+                        phiP = pi,
+                        Fyw = 0.3,
+                        eps = 1e-6)
 # alpha (shape) factor
 result$alpha
 # beta (scale) factor
