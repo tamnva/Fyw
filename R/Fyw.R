@@ -1,8 +1,21 @@
-#' Find the youngwater fraction (Fyw) and other associtate parameters
-#'
-#' @param AP A numeric vectors (or a scalar), amplitude of sine wave of
-#' @details Fitting non linear sine function of the following form:
-#' @return A list of object
+#' Find the youngwater fraction (Fyw) and other associate parameters
+#' @details Estimating the youngwater fraction (Fyw) and other associate parameters
+#' e.g., beta, alpha, median transit time using combination of different inputs
+#' AP, phiP, AS, and PhiS.
+#' @param AP A numeric vectors (or a scalar), amplitude of sine wave of isotope
+#' concentration in precipitation.
+#' @param phiP A numeric vectors (or a scalar), phase shift (radian) of sine wave
+#' of isotope concentration in precipitation.
+#' @param AS A numeric vectors (or a scalar), amplitude of sine wave of isotope
+#' concentration in streamflow. This function will check if AS < AP.
+#' @param phiS A numeric vectors (or a scalar), phase shift (radian) of sine wave
+#' of isotope concentration in streamflow. This function will automatically
+#' check if phiS > phiP
+#' @return A data frame containing different combination of input (AP, phiP, AS,
+#' and phiS) and the estimated Fyw, median TT, and alpha, beta of the gamma
+#' distribution. Column P and S indicates which inputs of precipitation and
+#' streamflow are used, e.g., P = 1 and S = 3 means that all parameter in this row
+#' is estimated by input AP[i], phiP[1] and AS[3], phiS[3].
 #' @seealso
 #' findAlphaBeta
 #' @examples

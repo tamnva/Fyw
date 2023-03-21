@@ -75,3 +75,15 @@ Fyw_weighted <- Fyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
 
 ```
 Note: The values ```Fyw_weighted$P[i]``` and ```Fyw_weighted$P[i]``` indicate that ```Fyw_weighted$Fyw[i]``` and their associates values (e.g, beta, alpha,...) are estimated from the input combination ```AP[Fyw_weighted$P[1]]``` and ```phiP[Fyw_weighted$P[1]]``` with ```AS[Fyw_weighted$P[1]]``` and ```phiS[Fyw_weighted$P[1]]```, which are also given in the ```Fyw_weighted``` data frame. 
+
+5. Find the age threshold (unit in years)
+``` r
+# Example of finding the age threshold
+findtauyw(alpha = 1.0, beta = 2.0, Fyw = 0.25)
+
+# This returns the value of 0.575 (years)
+# But from Fig. 10 (Kirchner, 2016) with alpha = 1 => tauyw = 0.19 (years)
+```
+
+
+

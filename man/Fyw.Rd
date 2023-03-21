@@ -2,21 +2,38 @@
 % Please edit documentation in R/Fyw.R
 \name{Fyw}
 \alias{Fyw}
-\title{Find the youngwater fraction (Fyw) and other associtate parameters}
+\title{Find the youngwater fraction (Fyw) and other associate parameters}
 \usage{
 Fyw(AP = NULL, phiP = NULL, AS = NULL, phiS = NULL)
 }
 \arguments{
-\item{AP}{A numeric vectors (or a scalar), amplitude of sine wave of}
+\item{AP}{A numeric vectors (or a scalar), amplitude of sine wave of isotope
+concentration in precipitation.}
+
+\item{phiP}{A numeric vectors (or a scalar), phase shift (radian) of sine wave
+of isotope concentration in precipitation.}
+
+\item{AS}{A numeric vectors (or a scalar), amplitude of sine wave of isotope
+concentration in streamflow. This function will check if AS < AP.}
+
+\item{phiS}{A numeric vectors (or a scalar), phase shift (radian) of sine wave
+of isotope concentration in streamflow. This function will automatically
+check if phiS > phiP}
 }
 \value{
-A list of object
+A data frame containing different combination of input (AP, phiP, AS,
+and phiS) and the estimated Fyw, median TT, and alpha, beta of the gamma
+distribution. Column P and S indicates which inputs of precipitation and
+streamflow are used, e.g., P = 1 and S = 3 means that all parameter in this row
+is estimated by input AP[i], phiP[1] and AS[3], phiS[3].
 }
 \description{
-Find the youngwater fraction (Fyw) and other associtate parameters
+Find the youngwater fraction (Fyw) and other associate parameters
 }
 \details{
-Fitting non linear sine function of the following form:
+Estimating the youngwater fraction (Fyw) and other associate parameters
+e.g., beta, alpha, median transit time using combination of different inputs
+AP, phiP, AS, and PhiS.
 }
 \examples{
 Fyw(AP = runif(3), phiP = runif(3), AS = runif(4), phiS = runif(4))
