@@ -28,12 +28,14 @@ library(Fyw)
 ?isotopeP
 ?isotopeS
 ```
-2. Fit observed O18 in precipitation to sine wave function in form (weighted with precipatation volume): C = A * sin(2*pi*t - phi) + k
+2. Fit observed O18 in precipitation to sine wave function in form (weighted with precipatation volume): $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$
 
 ``` r
 fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(0,10), phi = c(0, 2*pi),
                       k = c(-20,0), t = isotopeP$date, nIter = 50000,
                       nBestIter = 10, weights = isotopeP$precippitation_mm)
+                      
+# remove 'weights = isotopeP$precippitation_mm' for unweighted Fyw
 
 # Plot observed isotope in precipitation and the fitted sine wave
 library(ggplot2)
@@ -47,12 +49,14 @@ ggplot(fitSineP$predictedC)+
 fitSineP$parameter
 ```
 
-3. Fit observed O18 in streamflow to sine wave function in form (flow weighted): C = A * sin(2*pi*t - phi) + k
+3. Fit observed O18 in streamflow to sine wave function in form (flow weighted): $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$
 
 ``` r
 fitSineS <- fitSineNL(obsC = isotopeS$O18, a = c(0,10), phi = c(0, 2*pi),
                       k = c(-20,0), t = isotopeS$date, nIter = 50000,
                       nBestIter = 10, weights = isotopeS$streamflow_mm)
+
+# remove 'weights = isotopeS$streamflow_mm' for unweighted Fyw
 
 ggplot(fitSineS$predictedC)+
   geom_line(aes(x = date, y = predictedC, color = simulation))+
@@ -64,7 +68,7 @@ ggplot(fitSineS$predictedC)+
 fitSineS$parameter
 ```
 
-4. Youngwater fraction (weighted). To get the Fyw (unweighted) just remove the weights variables while fitting fitSineP and fitSineS.
+4. Youngwater fraction (weighted). To get the Fyw (unweighted) just remove the ```weights``` variables while fitting fitSineP and fitSineS.
 ``` r
 Fyw_weighted <- Fyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
                     AS = fitSineS$parameter$a, phiS = fitSineS$parameter$phi)
