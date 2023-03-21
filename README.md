@@ -26,7 +26,7 @@ library(Fyw)
 
 ``` r
 ?isotopeP
-?isotopeQ
+?isotopeS
 ```
 2. Fit observed O18 in precipitation to sine wave function in form (weighted with precipatation volume): C = A * sin(2*pi*t - phi) + k
 
@@ -50,21 +50,21 @@ fitSineP$parameter
 3. Fit observed O18 in streamflow to sine wave function in form (flow weighted): C = A * sin(2*pi*t - phi) + k
 
 ``` r
-fitSineQ <- fitSineNL(obsC = isotopeQ$O18, a = c(0,10), phi = c(0, 2*pi),
-                      k = c(-20,0), t = isotopeQ$date, nIter = 50000,
-                      nBestIter = 10, weights = isotopeQ$precippitation_mm)
+fitSineS <- fitSineNL(obsC = isotopeS$O18, a = c(0,10), phi = c(0, 2*pi),
+                      k = c(-20,0), t = isotopeS$date, nIter = 50000,
+                      nBestIter = 10, weights = isotopeS$precippitation_mm)
 
-ggplot(fitSineQ$predictedC)+
+ggplot(fitSineS$predictedC)+
   geom_line(aes(x = date, y = predictedC, color = simulation))+
-  geom_point(data = fitSineQ$observed, aes(x = date, y = obsC), size = 0.75)+
+  geom_point(data = fitSineS$observed, aes(x = date, y = obsC), size = 0.75)+
   scale_y_continuous(limits = c(-30,10))+ ylab("instream O18 concentration")+
   theme(legend.position = "none")
   
 # Fitted parameters (top nBestIter)
-fitSineQ$parameter
+fitSineS$parameter
 ```
 
 4. Youngwater fraction
 ``` r
-fitSineQ$parameter$a/fitSineP$parameter$a
+fitSineS$parameter$a/fitSineP$parameter$a
 ```

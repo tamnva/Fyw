@@ -9,7 +9,7 @@ NULL
 
 #' Isotope (O18) in streamflow from the Erlenbach catchment (Switzerland)
 #'
-#' @name isotopeQ
+#' @name isotopeS
 #' @docType data
 #' @author Tam V. Nguyen \email{nguyen@@ufz.de}
 #' @references \url{https://www.envidat.ch/#/metadata/four-years-of-daily-stable-water-isotope-data}
