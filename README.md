@@ -64,7 +64,7 @@ ggplot(fitSineS$predictedC)+
 fitSineS$parameter
 ```
 
-4. Youngwater fraction
+4. Youngwater fraction (weighted). To get the Fyw (unweighted) just remove the weights variables while fitting fitSineP and fitSineS.
 ``` r
 Fyw_weighted <- Fyw(AP = fitSineP$parameter$a, phiP = fitSineP$parameter$phi,
                     AS = fitSineS$parameter$a, phiS = fitSineS$parameter$phi)
