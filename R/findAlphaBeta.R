@@ -11,7 +11,6 @@
 #' and AP are the amplitudes of the fitted sine wave to isotope concentrations in
 #' streamflow and in precipitation, respectively.
 #' @param eps The minimum search distance
-#' @param maxIter Maximum number of iteration when using bisection approach
 #' @return A list object containing the shape (alpha), scale (beta) factors,
 #' and also mean transit time
 #' @references
