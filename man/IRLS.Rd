@@ -19,10 +19,10 @@ IRLS(
 \arguments{
 \item{Y}{A numeric vector representing a response variable}
 
-\item{X}{A numeric vector or array representing one or more explanatory variables.
-If X is a numeric vector, X must have the same length as Y.
-If X is an array, the first dimension of X mas have the same length
-as Y. Y and X must not be exactly collinear. This is not checked.}
+\item{X}{A numeric vector or array or matrix representing one or more
+explanatory variables. If X is a numeric vector, X must have the same length
+as Y. If X is an array (or data frame), the first dimension of X mas have
+the same length as Y. Y and X must not be exactly collinear. This is not checked.}
 
 \item{pweights}{An optional numeric vector of point weights (such as masses for
 mass-weighted regressions) the default weight vector gives all pweights

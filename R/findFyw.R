@@ -59,7 +59,7 @@ findFyw <- function(AP = NULL,
       if((phiS[i] > phiP[j]) & (AS[i] < AP[j])){
         # Now find Fyw and other parameters
         Fyw = AS[i]/AP[j]
-        temp <- findAlphaBeta(phiS = phiS[i], phiP = phiP[j], Fyw = Fyw)
+        temp <- findAlphaBeta(phiS = phiS[i], phiP = phiP[j], Fyw = Fyw, eps = 1e-6)
         output <- rbind(output, c(round(AP[j], 3),round(phiP[j], 3),
                                   round(AS[i], 3),round(phiS[i], 3),
                                   round(Fyw, 3), round(temp$alpha, 3),

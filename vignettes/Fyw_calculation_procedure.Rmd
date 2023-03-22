@@ -1,0 +1,19 @@
+---
+title: "Fyw_calculation_procedure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fyw_calculation_procedure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(Fyw)
+```
