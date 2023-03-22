@@ -38,7 +38,7 @@ library(ggplot2)
 library(lubridate)
 ```
 
-## 4. Approach 1 (most precise): The procedure in this approach is as follows:
+## 4. Approach 1 (most precise/direct)
 - Step 1: Fit observed isotope concentrations in precipitation to the following 
 sine wave function $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$, where $a$, 
 $phi$, and $k$ are parameters need to be estimated.
@@ -51,12 +51,13 @@ distribution of the gamma distribution (with best estimated alpha and beta value
 with a user-defined age thresholds.
 
 IMPORTANT: In this approach, we can fix the age threshold of the Fyw to any ages
+DISADVANTAGE: Very high computational demand
 
 ### Step 1. Fit observed O18 in precipitation to sine wave function
 
 ``` r
-fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(0,10), phi = c(0, 2*pi),
-                      k = c(-20,0), t = isotopeP$date, nIter = 5000,
+fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(1,4), phi = c(0, 2*pi),
+                      k = c(-15,-5), t = isotopeP$date, nIter = 5000,
                       nBestIter = 1, weights = isotopeP$precippitation_mm)
                       
 # Above, the nBestIter best simulation out of nIter simulations was selected
