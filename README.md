@@ -43,12 +43,14 @@ library(lubridate)
 sine wave function $c = a \cdot sin(2 \cdot \pi \cdot t - phi) + k$, where $a$, 
 $phi$, and $k$ are parameters need to be estimated.
 - Step 2: Using convolution approach to convolve the fitted sine wave above with 
-a gamma distribution to find isotope concentrations in streamflow with this gamma
-distribution function. User need to estimate the alpha (shape) and beta (scale) of 
-the gamma distribution. 
-- Step 3: The young water fraction can be calculated by calculating the cummulative
+a gamma distribution to find isotope concentrations in streamflow with a gamma
+distribution function. Users need to estimate the alpha (shape) and beta (scale) 
+factors of the gamma distribution (trial and error). 
+- Step 3: The young water fraction can be calculated by calculating the cumulative
 distribution of the gamma distribution (with best estimated alpha and beta values) 
 with a user-defined age thresholds.
+
+IMPORTANT: In this approach, we can fix the age threshold of the Fyw to any ages
 
 ### Step 1. Fit observed O18 in precipitation to sine wave function
 
@@ -71,7 +73,7 @@ ggplot(fitSineP$predictedC)+
 fitSineP$parameter
 ```
 
-### Step 2. Convolve the fitted sine wave with different gamma distribution 
+### Step 2. Convolve the fitted sine wave with the gamma distribution 
 ``` r
 # Let's estimate parameters of the gamma distribution (trial and error)
 estAlpha = 0.9
