@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="158mm"
+   height="150mm"
+   viewBox="0 0 158 150"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-midpoints="true"
+     inkscape:zoom="0.55419332"
+     inkscape:cx="252.61943"
+     inkscape:cy="323.89419"
+     inkscape:window-width="1920"
+     inkscape:window-height="1137"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-grids="false" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient11794">
+      <stop
+         style="stop-color:#1942fa;stop-opacity:1;"
+         offset="0"
+         id="stop11790" />
+      <stop
+         style="stop-color:#1942fa;stop-opacity:0;"
+         offset="1"
+         id="stop11792" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect3681"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect3644"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect2993"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect2989"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect2985"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect2981"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient11794"
+       id="linearGradient11796"
+       x1="80.736588"
+       y1="58.748604"
+       x2="82.185318"
+       y2="119.84716"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="opacity:0.5;fill:#6559fa;fill-opacity:0;fill-rule:evenodd;stroke:#2e0000;stroke-width:11.33858282;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       id="path1049"
+       inkscape:flatsided="true"
+       sodipodi:sides="5"
+       sodipodi:cx="212.16008"
+       sodipodi:cy="513.04163"
+       sodipodi:r1="300.90628"
+       sodipodi:r2="243.43829"
+       sodipodi:arg1="0.94011503"
+       sodipodi:arg2="1.5684336"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 389.60305,756.06134 35.867487,756.89714 -74.237702,420.7329 211.44911,212.13619 498.11846,419.38056 Z"
+       transform="matrix(0.26458333,0,0,0.26458333,24.660695,-52.391403)"
+       inkscape:transform-center-x="0.058130224"
+       inkscape:transform-center-y="-7.5472318" />
+    <path
+       id="rect3738"
+       style="opacity:0.5;fill:url(#linearGradient11796);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.07;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1"
+       d="m 28.637029,57.651317 27.281984,1.62747 24.619948,-1.468003 28.092269,1.112979 23.08201,-1.163074 24.7413,0.809013 -28.71137,89.080128 v 0 l -93.422433,0.39123 -0.170103,-0.1701 L 5.0186366,58.92751 Z"
+       sodipodi:nodetypes="cccccccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:2.82223px;line-height:1.55;font-family:Arial;-inkscape-font-specification:'Arial, Normal';letter-spacing:0px;word-spacing:0px;fill:#1227fe;fill-opacity:1;stroke:#0000fd;stroke-width:0.264583;stroke-opacity:0"
+       x="61.998909"
+       y="85.688179"
+       id="text6661"><tspan
+         sodipodi:role="line"
+         id="tspan6659"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24.6944px;font-family:Cambria;-inkscape-font-specification:'Cambria, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000105;fill-opacity:1;stroke:#0000fd;stroke-width:0.264583;stroke-opacity:0"
+         x="61.998909"
+         y="85.688179">Fyw</tspan></text>
+  </g>
+</svg>
