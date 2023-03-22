@@ -51,6 +51,7 @@ distribution of the gamma distribution (with best estimated alpha and beta value
 with a user-defined age thresholds.
 
 IMPORTANT: In this approach, we can fix the age threshold of the Fyw to any ages
+
 DISADVANTAGE: Very high computational demand
 
 ### Step 1. Fit observed O18 in precipitation to sine wave function
