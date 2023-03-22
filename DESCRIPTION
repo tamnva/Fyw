@@ -2,7 +2,11 @@ Package: Fyw
 Type: Package
 Title: Young water fraction calculation
 Version: 0.1.0
-Author: Tam V. Nguyen
+Authors@R: c(person("Tam V.", "Nguyen", 
+                    email = "tamnva@gmail.com", 
+                    role = c("aut", "cre"),
+                    comment = c(ORCID = "0000-0001-9111-4393"))
+             )
 Maintainer: Tam V. Nguyen <tam.nguyen@ufz.de>
 Description: This package provides functions for young water fraction calculation
     Functions for fitting linear and non-linear function to data
@@ -13,6 +17,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 URL: https://github.com/tamnva/Fyw
 BugReports: https://github.com/tamnva/Fyw/issues
+Depends: R (>= 4.0)
 Imports: 
     lhs (>= 1.1.6),
     lubridate (>= 1.9.0)

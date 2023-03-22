@@ -1,8 +1,10 @@
 test_that("multiple function works", {
   # Test regression coefficient
+  Y = c(1:10)
+  X = Y+ runif(10)*2
   testValue <- IRLS(Y = c(1:10),X = Y+ runif(10)*2)
   expect_true(testValue$coefficients[2] > 0)
-  testValue <- IRLS(Y = c(1:10),X = -Y  - runif(10)*2)
+  testValue <- IRLS(Y = Y,X = -X)
   expect_true(testValue$coefficients[2] < 0)
 
   # Test find Fyw
