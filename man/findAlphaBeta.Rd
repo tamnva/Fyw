@@ -19,8 +19,6 @@ and AP are the amplitudes of the fitted sine wave to isotope concentrations in
 streamflow and in precipitation, respectively.}
 
 \item{eps}{The minimum search distance}
-
-\item{maxIter}{Maximum number of iteration when using bisection approach}
 }
 \value{
 A list object containing the shape (alpha), scale (beta) factors,

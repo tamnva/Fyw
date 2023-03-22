@@ -19,6 +19,10 @@ fitSineNL(
 \item{obsC}{A numeric vectors containing values of the dependent variables, this
 could be measure isotope concentration in precipitation (or streamflow).}
 
+\item{a}{A numeric vector with positive numbers, representing the maximum and
+minimum search range for the amplitude A of cycle of isotope concentrations
+in precipitation (or streamflow).}
+
 \item{phi}{A numeric vector, representing the maximum and minimum search range
 for the phase shift of isotope concentrations in precipitation (or
 streamflow). The range must be within [0, 2*pi].}
@@ -27,11 +31,20 @@ streamflow). The range must be within [0, 2*pi].}
 for the phase shift of the constant value in the fitted function.}
 
 \item{t}{A date (or character) vector in format format yyyy-mm-dd
-(e.g., 2020-12-31)representing the date of observed isotope concentrations}
+(e.g., 2020-12-31) representing the date of observed isotope concentrations}
 
-\item{A}{A numeric vector with positive numbers, representing the maximum and
-minimum search range for the amplitude A of cycle of isotope concentrations
-in precipitation (or streamflow).}
+\item{nIter}{Maximum number of iterations (number of parametersets), higher
+number higher chance to have a better fit with observed data, however, longer
+computation time, defaut is 50000 (takes around 1 minute with example data)}
+
+\item{nBestIter}{Number of best parameter sets. For example, when running with
+50000 parameter sets, the function will rank which parameter set give a better
+fit with observed based on square error, then save all outputs from nBestIter.}
+
+\item{weights}{A weight vector (same length with obsC) when user wants to weight
+with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
+input is given, all of the weights is 1 (meaning equal weights/unweight - this
+case for calculating the unweighted Fyw).}
 }
 \value{
 A list of object
