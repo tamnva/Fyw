@@ -46,9 +46,8 @@ $phi$, and $k$ are parameters need to be estimated.
 a gamma distribution to find isotope concentrations in streamflow with a gamma
 distribution function. Users need to estimate the alpha (shape) and beta (scale) 
 factors of the gamma distribution (trial and error). 
-- Step 3: The young water fraction can be calculated by calculating the cumulative
-distribution of the gamma distribution (with best estimated alpha and beta values) 
-with a user-defined age thresholds.
+- Step 3: The young water fraction can be calculated using the cumulative gamma 
+distribution (with best estimated alpha and beta values) for any age thresholds.
 
 IMPORTANT: In this approach, we can fix the age threshold of the Fyw to any ages
 
@@ -107,7 +106,7 @@ ggplot()+
 # Let's say we want to know the Fyw with age thresholds of tauyw = 0.2 years
 # This Fyw (weighted) because Step 1 we used the weights = isotopeP$precippitation_mm
 tauyw = 0.2
-Fyw <- pgamma(tauyw, shape = estShape, scale = estScale, lower = TRUE)
+Fyw <- pgamma(tauyw, shape = estAlpha, scale = estBeta, lower = TRUE)
 ```
 
 
