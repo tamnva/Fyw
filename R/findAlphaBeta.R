@@ -2,14 +2,12 @@
 #' @description Find alpha (shape) and beta (scale) factor of the gamma
 #' distriubtion using the bisection approach. Solve equations (10) and (11) in
 #' Kirchner (2016).
-#' @param phiP Phase shift of isotope concentration in precipitation (in radian).
-#' phiP MUST be within the range of [0, 2*pi]
-#' @param phiS Phase shift of isotope concentration in streamflow (in radian). \cr
-#' phiS MUST be within the range of [0, 2*pi] \cr
-#' phiS MUST be smaller than phiP (will be automatically checked inside this function)
-#' @param Fyw Youngwater fraction, equals to the amplitude ratio AS/AP where AS
-#' and AP are the amplitudes of the fitted sine wave to isotope concentrations in
-#' streamflow and in precipitation, respectively.
+#' @param phiS_phiP Phase shift of isotope concentration in streamflow (in radian). \cr
+#' phiS_phiP MUST be > 0 \cr
+#' @param AS The amplitude of the sine-wave function of isotope concentration in
+#' precipitation. AS MUST be > 0
+#' @param AP The amplitude of the sine-wave function of isotope concentration in
+#' streamflow. AP MUST be > 0
 #' @param eps The minimum search distance
 #' @return A list object containing the shape (alpha), scale (beta) factors,
 #' and also mean transit time
@@ -19,9 +17,9 @@
 #' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
 #' https://doi.org/10.5194/hess-20-279-2016.
 #' @examples
-#' result <- findAlphaBeta(phiS = 2*pi,
-#'                         phiP = pi,
-#'                         Fyw = 0.3,
+#' result <- findAlphaBeta(phiS_phiP = pi,
+#'                         AS = 1.0,
+#'                         AP = 2.0,
 #'                         eps = 1e-6)
 #' # alpha (shape) factor
 #' result$alpha
@@ -31,28 +29,27 @@
 #' result$meanTT
 #' @export
 
-findAlphaBeta <- function(phiS = NULL,
-                          phiP = NULL,
-                          Fyw = NULL,
+findAlphaBeta <- function(phiS_phiP = NULL,
+                          AS = NULL,
+                          AP = NULL,
                           eps = 1e-6){
 
   # NOTE: Shape factor is alpha, scale factor is beta
 
   # alpha function (Eq. 11 in Kirchner 2016, HESS)
   f <- function(alpha){
-    phiS - phiP - alpha * atan(sqrt(Fyw^(-2/alpha) - 1))
+    phiS_phiP - alpha * atan(sqrt((AS/AP)^(-2/alpha) - 1))
   }
 
   # Check if phase shift in isotope signal
-  if(phiS < phiP){
-    alpha <- NA
-    stop("phiS MUST BE > phiP")
+  if(phiS_phiP <= 0){
+    stop("phiS_phiP must be > 0")
   }
 
   # Check if Fyw > 1
-  if(Fyw > 1){
+  if(AS/AP > 1){
     alpha <- NA
-    stop("Fyw must be smaller or equalt to 1")
+    stop("Fyw must be < 1")
   }
 
   # Using bisection algorithm, search range 1.0e-6 and 20
@@ -93,7 +90,7 @@ findAlphaBeta <- function(phiS = NULL,
   output$alpha <- alpha
 
   # Also find beta using equation 10 (Kirchner, 2016), f = 1 for seasonal cycle
-  output$beta <- (1/(2*pi*1))*sqrt(Fyw^(-2/alpha) - 1)
+  output$beta <- (1/(2*pi*1))*sqrt((AS/AP)^(-2/alpha) - 1)
   output$meanTT <- output$alpha * output$beta
 
   return(output)

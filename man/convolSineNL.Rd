@@ -2,7 +2,7 @@
 % Please edit documentation in R/convolSineNL.R
 \name{convolSineNL}
 \alias{convolSineNL}
-\title{Convolve sine wave input using gamma function}
+\title{Convolve sine wave isotope concentration in precipitation using gamma function}
 \usage{
 convolSineNL(
   AP = NULL,
@@ -47,7 +47,7 @@ simulatedDate}
 A data frame of the date and simulated instream isotope concentration
 }
 \description{
-Convolve sine wave input using gamma function
+Convolve sine wave isotope concentration in precipitation using gamma function
 }
 \details{
 This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)

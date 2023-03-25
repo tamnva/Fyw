@@ -4,19 +4,17 @@
 \alias{findAlphaBeta}
 \title{Find findAlphaBeta using bisection approach}
 \usage{
-findAlphaBeta(phiS = NULL, phiP = NULL, Fyw = NULL, eps = 1e-06)
+findAlphaBeta(phiS_phiP = NULL, AS = NULL, AP = NULL, eps = 1e-06)
 }
 \arguments{
-\item{phiS}{Phase shift of isotope concentration in streamflow (in radian). \cr
-phiS MUST be within the range of [0, 2*pi] \cr
-phiS MUST be smaller than phiP (will be automatically checked inside this function)}
+\item{phiS_phiP}{Phase shift of isotope concentration in streamflow (in radian). \cr
+phiS_phiP MUST be > 0 \cr}
 
-\item{phiP}{Phase shift of isotope concentration in precipitation (in radian).
-phiP MUST be within the range of [0, 2*pi]}
+\item{AS}{The amplitude of the sine-wave function of isotope concentration in
+precipitation. AS MUST be > 0}
 
-\item{Fyw}{Youngwater fraction, equals to the amplitude ratio AS/AP where AS
-and AP are the amplitudes of the fitted sine wave to isotope concentrations in
-streamflow and in precipitation, respectively.}
+\item{AP}{The amplitude of the sine-wave function of isotope concentration in
+streamflow. AP MUST be > 0}
 
 \item{eps}{The minimum search distance}
 }
@@ -30,9 +28,9 @@ distriubtion using the bisection approach. Solve equations (10) and (11) in
 Kirchner (2016).
 }
 \examples{
-result <- findAlphaBeta(phiS = 2*pi,
-                        phiP = pi,
-                        Fyw = 0.3,
+result <- findAlphaBeta(phiS_phiP = pi,
+                        AS = 1.0,
+                        AP = 2.0,
                         eps = 1e-6)
 # alpha (shape) factor
 result$alpha
