@@ -1,4 +1,5 @@
-#' Isotope (O18) in precipitation and streamflow from the three catchments in Switzerland
+#' Isotope (O18) in precipitation and streamflow from the Alp and Erlenbach
+#' catchment in Switzerland
 #'
 #' @name isotopeData
 #' @docType data

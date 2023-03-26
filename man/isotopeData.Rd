@@ -3,9 +3,11 @@
 \docType{data}
 \name{isotopeData}
 \alias{isotopeData}
-\title{Isotope (O18) in precipitation and streamflow from the three catchments in Switzerland}
+\title{Isotope (O18) in precipitation and streamflow from the Alp and Erlenbach
+catchment in Switzerland}
 \description{
-Isotope (O18) in precipitation and streamflow from the three catchments in Switzerland
+Isotope (O18) in precipitation and streamflow from the Alp and Erlenbach
+catchment in Switzerland
 }
 \references{
 \url{https://www.envidat.ch/#/metadata/four-years-of-daily-stable-water-isotope-data}
