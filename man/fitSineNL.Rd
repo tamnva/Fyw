@@ -12,7 +12,7 @@ fitSineNL(
   t = NULL,
   nIter = 50000,
   nBestIter = 30,
-  weights = rep(1, length(obsC))
+  weight = rep(1, length(obsC))
 )
 }
 \arguments{
@@ -41,9 +41,9 @@ computation time, defaut is 50000 (takes around 1 minute with example data)}
 50000 parameter sets, the function will rank which parameter set give a better
 fit with observed based on square error, then save all outputs from nBestIter.}
 
-\item{weights}{A weight vector (same length with obsC) when user wants to weight
+\item{weight}{A weight vector (same length with obsC) when user wants to weight
 with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
-input is given, all of the weights is 1 (meaning equal weights/unweight - this
+input is given, all of the weight is 1 (meaning equal weight/unweight - this
 case for calculating the unweighted Fyw).}
 }
 \value{
@@ -57,14 +57,18 @@ Fitting non linear sine function of the following form: \cr
 y = a * sin(2 * pi * t - phi) + k
 }
 \examples{
-fitSineS <- fitSineNL(obsC = isotopeS$O18,
+#Get isotope data in streamflow of the Alp catchment (from the example dataset)
+isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
+
+# Not to sine wave to observed isotope in streamflow
+fitSineS <- fitSineNL(obsC = isotopeS_Alp$delta_18O,
                       a = c(0,10),
                       phi = c(0, 2*pi),
                       k = c(-20,0),
-                      t = isotopeS$date,
+                      t = isotopeS_Alp$date,
                       nIter = 5000,
                       nBestIter = 2,
-                      weights = isotopeS$streamflow_mm)
+                      weight = isotopeS_Alp$water_flux_mm)
 }
 \seealso{
 toDecimal, randomLHS

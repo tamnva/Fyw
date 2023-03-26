@@ -18,9 +18,9 @@
 #' @param nBestIter Number of best parameter sets. For example, when running with
 #' 50000 parameter sets, the function will rank which parameter set give a better
 #' fit with observed based on square error, then save all outputs from nBestIter.
-#' @param weights A weight vector (same length with obsC) when user wants to weight
+#' @param weight A weight vector (same length with obsC) when user wants to weight
 #' with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
-#' input is given, all of the weights is 1 (meaning equal weights/unweight - this
+#' input is given, all of the weight is 1 (meaning equal weight/unweight - this
 #' case for calculating the unweighted Fyw).
 #' @details Fitting non linear sine function of the following form: \cr
 #' y = a * sin(2 * pi * t - phi) + k
@@ -28,14 +28,18 @@
 #' @seealso
 #' toDecimal, randomLHS
 #' @examples
-#' fitSineS <- fitSineNL(obsC = isotopeS$O18,
+#' #Get isotope data in streamflow of the Alp catchment (from the example dataset)
+#' isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
+#'
+#' # Not to sine wave to observed isotope in streamflow
+#' fitSineS <- fitSineNL(obsC = isotopeS_Alp$delta_18O,
 #'                       a = c(0,10),
 #'                       phi = c(0, 2*pi),
 #'                       k = c(-20,0),
-#'                       t = isotopeS$date,
+#'                       t = isotopeS_Alp$date,
 #'                       nIter = 5000,
 #'                       nBestIter = 2,
-#'                       weights = isotopeS$streamflow_mm)
+#'                       weight = isotopeS_Alp$water_flux_mm)
 #' @export
 
  fitSineNL <- function(obsC = NULL,
@@ -45,7 +49,7 @@
                        t = NULL,
                        nIter = 50000,
                        nBestIter = 30,
-                       weights = rep(1, length(obsC))){
+                       weight = rep(1, length(obsC))){
 
    # Output as list object
    output <- list()
@@ -83,9 +87,9 @@
      # Calculate the predict isotope concentration
      cPredicted <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
 
-     # Calculate sum or square error (with weights)
+     # Calculate sum or square error (with weight)
      weightedLeastSquare <- c(weightedLeastSquare,
-                              sum(weights * (cPredicted - obsC)^2))
+                              sum(weight * (cPredicted - obsC)^2))
    }
 
    # Select best saveBestIter models

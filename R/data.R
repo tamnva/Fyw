@@ -1,17 +1,8 @@
-#' Isotope (O18) in streamflow from the Erlenbach catchment (Switzerland)
+#' Isotope (O18) in precipitation and streamflow from the three catchments in Switzerland
 #'
-#' @name isotopeS
+#' @name isotopeData
 #' @docType data
 #' @author Tam V. Nguyen \email{nguyen@@ufz.de}
 #' @references \url{https://www.envidat.ch/#/metadata/four-years-of-daily-stable-water-isotope-data}
-#' @keywords Isotope in streamflow
-NULL
-
-#' Isotope (O18) in precipitation from the Erlenbach catchment (Switzerland)
-#'
-#' @name isotopeP
-#' @docType data
-#' @author Tam V. Nguyen \email{nguyen@@ufz.de}
-#' @references \url{https://www.envidat.ch/#/metadata/four-years-of-daily-stable-water-isotope-data}
-#' @keywords Isotope in precipitation
+#' @keywords Isotope in preicpitation and streamflow
 NULL

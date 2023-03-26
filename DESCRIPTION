@@ -20,7 +20,9 @@ BugReports: https://github.com/tamnva/Fyw/issues
 Depends: R (>= 4.0)
 Imports: 
     lhs (>= 1.1.6),
-    lubridate (>= 1.9.0)
+    lubridate (>= 1.9.0),
+    doParallel(>= 1.0.17),
+    parallel(>= 4.2.2)
 Suggests: 
     knitr,
     rmarkdown,

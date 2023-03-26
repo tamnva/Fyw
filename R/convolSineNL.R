@@ -29,8 +29,10 @@
 #' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
 #' https://doi.org/10.5194/hess-20-279-2016.
 #' @examples
+#' # Get isotope data in streamflow of the Alp catchment (from the example dataset)
+#' isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
 #' simC <- convolSineNL(AP = 1.909, phiP = 2.016, kP = -11.05995, estAlpha = 0.802,
-#'                      estBeta = 0.127, simulatedDate = isotopeS$date,
+#'                      estBeta = 0.127, simulatedDate = isotopeS_Alp$date,
 #'                      nWarmupYears = 5, printAll = FALSE)
 #' @export
 
