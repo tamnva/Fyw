@@ -16,13 +16,13 @@ convolSineNL(
 )
 }
 \arguments{
-\item{AP}{Amplitude of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
+\item{AP}{Amplitude of the sine wave (cP = AP*sin(2*pi*t + phiP) + kP) of
 isotope concentration in precipitation.}
 
-\item{phiP}{Phase shift of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
+\item{phiP}{Phase shift of the sine wave (cP = AP*sin(2*pi*t + phiP) + kP) of
 isotope concentration in precipitation.}
 
-\item{kP}{The constant factor of sine wave (cP = AP*sin(2*pi*t - phiP) + kP)
+\item{kP}{The constant factor of sine wave (cP = AP*sin(2*pi*t + phiP) + kP)
 of isotope concentration in precipitation.}
 
 \item{estAlpha}{The 'user' estimated alpha (shape) of the gamma distribution

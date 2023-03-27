@@ -85,7 +85,7 @@
    for (i in 1:nIter){
 
      # Calculate the predict isotope concentration
-     cPredicted <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
+     cPredicted <- parameterSet$a[i] * sin(2*pi*tDecimal + parameterSet$phi[i]) + parameterSet$k[i]
 
      # Calculate sum or square error (with weight)
      weightedLeastSquare <- c(weightedLeastSquare,
