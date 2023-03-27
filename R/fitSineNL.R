@@ -23,7 +23,7 @@
 #' input is given, all of the weight is 1 (meaning equal weight/unweight - this
 #' case for calculating the unweighted Fyw).
 #' @details Fitting non linear sine function of the following form: \cr
-#' y = a * sin(2 * pi * t - phi) + k
+#' y = a * sin(2 * pi * t + phi) + k
 #' @return A list of object
 #' @seealso
 #' toDecimal, randomLHS
@@ -102,7 +102,7 @@
    r2 <- c()
 
    for (i in 1:nBestIter){
-     predictedVariable <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
+     predictedVariable <- parameterSet$a[i] * sin(2*pi*tDecimal + parameterSet$phi[i]) + parameterSet$k[i]
      predictedC <- c(predictedC, predictedVariable)
      simulation <- c(simulation, rep(paste0("simulation_",i), length(obsC)))
      r2 <- c(r2, cor(x = obsC, y =  predictedVariable)^2)
