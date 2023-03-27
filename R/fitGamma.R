@@ -76,6 +76,7 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   output <- list()
   output$simulatedC <- cbind(date, simulatedC[,1:nBestIter])
   output$parameterSet <- parameterSet[1:nBestIter,]
+  output$squareErr <- squareErr[rankingDecreasing][1:nBestIter]
 
   return(output)
 }
