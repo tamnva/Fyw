@@ -33,6 +33,7 @@
 #' + kP) with the given gamma distribution (user given the shape and scale factor)
 #' and return the simulated isotope concentrations in streamflow
 #' @importFrom foreach %dopar%
+#' @importFrom utils stack
 #' @references
 #' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
 #' tracer cycles quantify young water fractions, but not mean transit times,
@@ -98,9 +99,9 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   weightedMSE <- rep(NA, nIter)
   for (i in 1:nIter){
     if(is.null(weight)){
-      weightedMSE[i] <- mean((simulatedC[,i] - fittedData)^2)
+      weightedMSE[i] <- mean((simulated[,i] - fittedData)^2)
     } else {
-      weightedMSE[i] <- mean(weight * (simulatedC[,i] - fittedData)^2)
+      weightedMSE[i] <- mean(weight * (simulated[,i] - fittedData)^2)
     }
   }
 

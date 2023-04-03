@@ -22,6 +22,7 @@
 #' with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
 #' input is given, all of the weight is 1 (meaning equal weight/unweight - this
 #' case for calculating the unweighted Fyw).
+#' @importFrom stats cor
 #' @details Fitting non linear sine function of the following form: \cr
 #' y = a * sin(2 * pi * t + phi) + k
 #' @return A list of object

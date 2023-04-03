@@ -19,6 +19,7 @@
 #' concentration in streamflow) is printed for the entire simulation period,
 #' including the warm up period. If FALSE then the results is only for the
 #' simulatedDate
+#' @importFrom stats pgamma
 #' @return A data frame containing the date and simulated tracer concentrations
 #' @details This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
 #' + kP) with the given gamma distribution (user given the shape and scale factor)
@@ -88,7 +89,7 @@ convolSineNL <- function(AP = NULL, phiP = NULL, kP = NULL, estAlpha = NULL,
 
   for (i in 1:nDates){
     simIsoConc <- obsIsoPre[i] * pgamma(simDateDec0, shape = estAlpha,
-                                        scale = estBeta, lower = TRUE)
+                                        scale = estBeta, lower.tail = TRUE)
     simIsoConc <- diff(simIsoConc)
     convolIsoConc[i:nDates] <- convolIsoConc[i:nDates] + simIsoConc[1:(nDates - i + 1)]
   }

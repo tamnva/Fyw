@@ -1,6 +1,6 @@
 Package: Fyw
 Type: Package
-Title: Young water fraction calculation
+Title: Young water fraction calculation.
 Version: 0.1.0
 Authors@R: c(person("Tam V.", "Nguyen", 
                     email = "tamnva@gmail.com", 
@@ -8,9 +8,7 @@ Authors@R: c(person("Tam V.", "Nguyen",
                     comment = c(ORCID = "0000-0001-9111-4393"))
              )
 Maintainer: Tam V. Nguyen <tam.nguyen@ufz.de>
-Description: This package provides functions for young water fraction calculation
-    Functions for fitting linear and non-linear function to data
-    Functions for finding the alpha and beta values of the gamma distribution
+Description: This package provides functions for young water fraction calculation.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

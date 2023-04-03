@@ -11,6 +11,7 @@
 #' @param eps The minimum search distance, default value is 1e-6. In other words,
 #' if the next tauyw values changes within this range compared to the previous value
 #' the function will stop and return the next tauyw value
+#' @importFrom stats pgamma
 #' @return Return a tibble object containing the age threshold of youngwater fraction
 #' (tauyw) in years. This data frame also contains input.
 #' @details In this function, we solve equation 13 (Kirchner et al., 2013) with
@@ -66,7 +67,7 @@ findtauyw <- function(alpha = NULL,
 
   # define function need to be found the root
   f <- function(tauyw, i){
-    pgamma(tauyw, shape = alpha[i], scale = beta[i], lower = TRUE) - Fyw[i]
+    pgamma(tauyw, shape = alpha[i], scale = beta[i], lower.tail = TRUE) - Fyw[i]
   }
 
   # Initial output (tauyw)

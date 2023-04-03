@@ -30,8 +30,7 @@ These data are isotope (O18) concentrations in precipitation and streamflow
 library(Fyw)
 
 # Example dataset
-?isotopeP
-?isotopeS
+?isotopeData
 
 # Other packages to run the example Rscript 
 library(ggplot2)
@@ -56,22 +55,28 @@ DISADVANTAGE: Very high computational demand
 ### Step 1. Fit observed O18 in precipitation to sine wave function
 
 ``` r
-fitSineP <- fitSineNL(obsC = isotopeP$O18, a = c(1,4), phi = c(0, 2*pi),
-                      k = c(-15,-5), t = isotopeP$date, nIter = 5000,
-                      nBestIter = 1, weights = isotopeP$precippitation_mm)
-                      
-# Above, the nBestIter best simulation out of nIter simulations was selected
-# Remove 'weights = isotopeP$precippitation_mm' for unweighted Fyw
+# Get isotope data in precipitation of the Alp catchment
+isotopeP_Alp <- subset(isotopeData, catchment == "Alp" & 
+                       variable == "precipitation")
 
-# Plot observed isotope in precipitation and the fitted sine wave
-ggplot(fitSineP$predictedC)+
-  geom_line(aes(x = date, y = predictedC, color = simulation))+
-  geom_point(data = fitSineP$observed, aes(x = date, y = obsC), size = 0.75)+
-  scale_y_continuous(limits = c(-30,10))+ylab("precipitation O18 concentration")+
+# Fit sine-wave to observed isotope concentrations in precipitation
+fitSineP <- fitSineNL(observed = isotopeP_Alp$delta_18O, 
+                      a = c(1,4), 
+                      phi = c(0, 2*pi),
+                      k = c(-15,-5), 
+                      t = isotopeP_Alp$date, 
+                      nIter = 5000,
+                      nBestIter = 10, 
+                      weight = isotopeP_Alp$water_flux_mm)
+
+# Plot simulated isotope concentrations in precipitation (only for nBestIter)
+ggplot()+
+  geom_line(data = fitSineP$simulated, aes(x = date, y = simulated, color = simulation))+
+  geom_point(data = fitSineP$observed, aes(x = date, y = observed))+
+  labs(x = "", y = expression(paste(delta^{18}, "O concentration (‰)")), color = "") +  
   theme(legend.position = "none")
-  
-# Fitted parameters (top nBestIter)
-fitSineP$parameter
+
+# Plot parameter values (only for nBestIter)
 ```
 
 ### Step 2. Convolve the fitted sine wave with the gamma distribution 
