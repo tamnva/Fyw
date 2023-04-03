@@ -23,6 +23,7 @@
 #' and kP[i]. The mean square error (weighted if the weights are given) between
 #' simulated and fittedData, the nBestIter iteration will be saved as output from
 #' this function.
+#' @param nBestIter Number of best parameters that will be save to output
 #' @param nCores Number of cores for parallel simulation, e.g., if nIter = 10 and
 #' nCores = 2, then there will be 2 parallel run on each cores with 5 iterations
 #' @param nWarmupYears Number of warmup years

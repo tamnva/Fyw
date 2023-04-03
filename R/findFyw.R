@@ -59,7 +59,7 @@ findFyw <- function(AP = NULL,
       if((phiS[i] > phiP[j]) & (AS[i] < AP[j])){
         # Now find Fyw and other parameters
         Fyw = AS[i]/AP[j]
-        temp <- findAlphaBeta(phiS_phiP = phiS[i] - phiP[j],
+        temp <- findAlphaBetaMTT(phiS_phiP = phiS[i] - phiP[j],
                               AS = AS[i],
                               AP = AP[j],
                               eps = 1e-6)
