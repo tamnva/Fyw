@@ -20,7 +20,7 @@ Imports:
     lhs (>= 1.1.6),
     lubridate (>= 1.9.0),
     doParallel(>= 1.0.17),
-    parallel(>= 4.2.2),
+    parallel(>= 3.6.2),
     foreach (>= 1.5.2),
     tibble (>= 3.1.8)
 Suggests: 
