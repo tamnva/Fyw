@@ -2,7 +2,7 @@
 % Please edit documentation in R/convolSineNL.R
 \name{convolSineNL}
 \alias{convolSineNL}
-\title{Convolve sine wave isotope concentration in precipitation using gamma function}
+\title{Convolve the sine-wave function with the gamma distribution function}
 \usage{
 convolSineNL(
   AP = NULL,
@@ -17,13 +17,13 @@ convolSineNL(
 }
 \arguments{
 \item{AP}{Amplitude of the sine wave (cP = AP*sin(2*pi*t + phiP) + kP) of
-isotope concentration in precipitation.}
+tracer concentration in precipitation.}
 
 \item{phiP}{Phase shift of the sine wave (cP = AP*sin(2*pi*t + phiP) + kP) of
-isotope concentration in precipitation.}
+tracerconcentration in precipitation.}
 
 \item{kP}{The constant factor of sine wave (cP = AP*sin(2*pi*t + phiP) + kP)
-of isotope concentration in precipitation.}
+of tracer concentration in precipitation.}
 
 \item{estAlpha}{The 'user' estimated alpha (shape) of the gamma distribution
 function used for the convolution approach}
@@ -32,7 +32,7 @@ function used for the convolution approach}
 use for the convolution approach}
 
 \item{simulatedDate}{The date vector (must be in format "YYYY-MM-DD") and as
-DATE of the time isotope concentration in streamflow should be estimated}
+DATE of the time tracer concentration in streamflow should be estimated}
 
 \item{nWarmupYears}{Number of warm-up years before the starting date of the
 simulatedDate. This should be a few years (e.g.,5 years) to remove the effect
@@ -44,18 +44,18 @@ including the warm up period. If FALSE then the results is only for the
 simulatedDate}
 }
 \value{
-A data frame of the date and simulated instream isotope concentration
+A data frame containing the date and simulated tracer concentrations
 }
 \description{
-Convolve sine wave isotope concentration in precipitation using gamma function
+Convolve the sine-wave function with the gamma distribution function
 }
 \details{
 This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
 + kP) with the given gamma distribution (user given the shape and scale factor)
-and return the simulated isotope concentrations in streamflow
+and return the simulated tracer concentrations in streamflow
 }
 \examples{
-# Get isotope data in streamflow of the Alp catchment (from the example dataset)
+# Get tracer data in streamflow of the Alp catchment (from the example dataset)
 isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
 simC <- convolSineNL(AP = 1.909, phiP = 2.016, kP = -11.05995, estAlpha = 0.802,
                      estBeta = 0.127, simulatedDate = isotopeS_Alp$date,

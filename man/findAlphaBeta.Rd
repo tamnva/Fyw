@@ -8,7 +8,7 @@ findAlphaBeta(phiS_phiP = NULL, AS = NULL, AP = NULL, eps = 1e-06)
 }
 \arguments{
 \item{phiS_phiP}{Phase shift of isotope concentration in streamflow (in radian). \cr
-phiS_phiP MUST be > 0 \cr}
+phiS_phiP MUST be > 0}
 
 \item{AS}{The amplitude of the sine-wave function of isotope concentration in
 precipitation. AS MUST be > 0}
@@ -23,7 +23,7 @@ A list object containing the shape (alpha), scale (beta) factors,
 and also mean transit time
 }
 \description{
-Find alpha (shape) and beta (scale) factor of the gamma
+Find alpha (shape) and beta (scale) factors of the gamma
 distriubtion using the bisection approach. Solve equations (10) and (11) in
 Kirchner (2016).
 }

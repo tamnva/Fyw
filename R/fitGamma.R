@@ -1,7 +1,31 @@
 #' Fit gamma distribution to observed instream tracer concentratoin
 #'
 #' @param AP Amplitude of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
-#' isotope concentration in precipitation.
+#' isotope concentration in precipitation. This can be a scalar or a vector
+#' @param phiP Phase of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
+#' isotope concentration in precipitation. This can be a scalar or a vector
+#' @param kP The constant of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
+#' isotope concentration in precipitation. This can be a scalar or a vector.
+#' If AP, phiP, kP are vectors, they must have the same length
+#' @param alphaRange The range of alpha (shape) parameter of the gamma distribution
+#' @param betaRange The range of beta (scale) parameter of the gamma distribution
+#' @param simulatedDate The date vector (yyyy-mm-dd format as.Date), indicating
+#' the period of simulation
+#' @param fittedData The fitted isotope concentration in streamflow for the simulatedDate.
+#' This must have the same length as simulatedDate and contains no missing data.
+#' The model will calculate the mean square error between the simulated and fitted data
+#' This mean square error could be weighted if weight is given
+#' @param weight The weight vectors (e.g., streamflow volume) at the simulatedDate.
+#' Must be a vector of the same length with simulatedDate.
+#' @param nIter Number of iterations. This function will generate a random nIter
+#' parametersets (alpha, beta) within the user-defined range as above. These
+#' parametersets will be combined with a random parameterset of AP[i], phiP[i],
+#' and kP[i]. The mean square error (weighted if the weights are given) between
+#' simulated and fittedData, the nBestIter iteration will be saved as output from
+#' this function.
+#' @param nCores Number of cores for parallel simulation, e.g., if nIter = 10 and
+#' nCores = 2, then there will be 2 parallel run on each cores with 5 iterations
+#' @param nWarmupYears Number of warmup years
 #' @return A data frame of the date and simulated instream isotope concentration
 #' @details This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
 #' + kP) with the given gamma distribution (user given the shape and scale factor)
@@ -36,16 +60,26 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   parameterSet[,1] <- alphaRange[1] + parameterSet[,1] * (alphaRange[2] - alphaRange[1])
   parameterSet[,2] <- betaRange[1] + parameterSet[,2] * (betaRange[2] - betaRange[1])
 
+  if (length(AP) != length(phiP) | length(AP) != length(kP)){
+    stop("AP, phiP, and AP must be a scalar or vector of the same length")
+  }
+
+  # Randomly mix AP, phiP, kP with parameterSet
+  iloc <- sample.int(length(AP), nIter, replace = TRUE)
+  parameterSet <- data.frame(AP = AP[iloc], phiP = phiP[iloc], kP = kP[iloc],
+                             alpha = parameterSet[,1], beta = parameterSet[,2])
+
   # Make cluster
   cl <- parallel::makeCluster(nCores)
   doParallel::registerDoParallel(cl)
 
   # Get instream tracer concentrations by running on nCores
   simulatedC <- foreach(i = 1:nIter, .combine = cbind, .export=c("convolSineNL")) %dopar% {
-    simC <- convolSineNL(AP = AP, phiP = phiP, kP = kP, estAlpha = parameterSet[i,1],
-                         estBeta = parameterSet[i,2], simulatedDate = simulatedDate,
+    simC <- convolSineNL(AP = parameterSet$AP[i], phiP = parameterSet$phiP[i],
+                         kP = parameterSet$kP[i], estAlpha = parameterSet$alpha[i],
+                         estBeta = parameterSet$beta[i], simulatedDate = simulatedDate,
                          nWarmupYears = nWarmupYears, printAll = FALSE)
-    simC$simIsoConc
+    simC$simulated
   }
 
   # Close cluster
@@ -69,8 +103,7 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   colnames(simulatedC) <- paste0("simulation_", c(1:ncol(simulatedC)))
 
   date <- simulatedDate
-  parameterSet <- as.data.frame(parameterSet[rankingDecreasing,])
-  colnames(parameterSet) <- c("alpha", "beta")
+  parameterSet <- parameterSet[rankingDecreasing,]
 
   # Create output object
   output <- list()

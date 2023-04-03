@@ -1,9 +1,9 @@
 #' Find findAlphaBeta using bisection approach
-#' @description Find alpha (shape) and beta (scale) factor of the gamma
+#' @description Find alpha (shape) and beta (scale) factors of the gamma
 #' distriubtion using the bisection approach. Solve equations (10) and (11) in
 #' Kirchner (2016).
 #' @param phiS_phiP Phase shift of isotope concentration in streamflow (in radian). \cr
-#' phiS_phiP MUST be > 0 \cr
+#' phiS_phiP MUST be > 0
 #' @param AS The amplitude of the sine-wave function of isotope concentration in
 #' precipitation. AS MUST be > 0
 #' @param AP The amplitude of the sine-wave function of isotope concentration in

@@ -21,7 +21,41 @@ fitGamma(
 }
 \arguments{
 \item{AP}{Amplitude of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
-isotope concentration in precipitation.}
+isotope concentration in precipitation. This can be a scalar or a vector}
+
+\item{phiP}{Phase of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
+isotope concentration in precipitation. This can be a scalar or a vector}
+
+\item{kP}{The constant of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
+isotope concentration in precipitation. This can be a scalar or a vector.
+If AP, phiP, kP are vectors, they must have the same length}
+
+\item{alphaRange}{The range of alpha (shape) parameter of the gamma distribution}
+
+\item{betaRange}{The range of beta (scale) parameter of the gamma distribution}
+
+\item{simulatedDate}{The date vector (yyyy-mm-dd format as.Date), indicating
+the period of simulation}
+
+\item{fittedData}{The fitted isotope concentration in streamflow for the simulatedDate.
+This must have the same length as simulatedDate and contains no missing data.
+The model will calculate the mean square error between the simulated and fitted data
+This mean square error could be weighted if weight is given}
+
+\item{weight}{The weight vectors (e.g., streamflow volume) at the simulatedDate.
+Must be a vector of the same length with simulatedDate.}
+
+\item{nIter}{Number of iterations. This function will generate a random nIter
+parametersets (alpha, beta) within the user-defined range as above. These
+parametersets will be combined with a random parameterset of AP[i], phiP[i],
+and kP[i]. The mean square error (weighted if the weights are given) between
+simulated and fittedData, the nBestIter iteration will be saved as output from
+this function.}
+
+\item{nCores}{Number of cores for parallel simulation, e.g., if nIter = 10 and
+nCores = 2, then there will be 2 parallel run on each cores with 5 iterations}
+
+\item{nWarmupYears}{Number of warmup years}
 }
 \value{
 A data frame of the date and simulated instream isotope concentration
