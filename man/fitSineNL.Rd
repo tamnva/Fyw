@@ -5,18 +5,18 @@
 \title{Fit a nonlinear sine wave function}
 \usage{
 fitSineNL(
-  obsC = NULL,
+  observed = NULL,
   a = c(0, 10),
   phi = c(0, 2 * pi),
   k = c(-20, 0),
   t = NULL,
   nIter = 50000,
   nBestIter = 30,
-  weight = rep(1, length(obsC))
+  weight = rep(1, length(observed))
 )
 }
 \arguments{
-\item{obsC}{A numeric vectors containing values of the dependent variables, this
+\item{observed}{A numeric vectors containing values of the dependent variables, this
 could be measure isotope concentration in precipitation (or streamflow).}
 
 \item{a}{A numeric vector with positive numbers, representing the maximum and
@@ -41,7 +41,7 @@ computation time, defaut is 50000 (takes around 1 minute with example data)}
 50000 parameter sets, the function will rank which parameter set give a better
 fit with observed based on square error, then save all outputs from nBestIter.}
 
-\item{weight}{A weight vector (same length with obsC) when user wants to weight
+\item{weight}{A weight vector (same length with observed) when user wants to weight
 with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
 input is given, all of the weight is 1 (meaning equal weight/unweight - this
 case for calculating the unweighted Fyw).}
@@ -61,7 +61,7 @@ y = a * sin(2 * pi * t + phi) + k
 isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
 
 # Not to sine wave to observed isotope in streamflow
-fitSineS <- fitSineNL(obsC = isotopeS_Alp$delta_18O,
+fitSineS <- fitSineNL(observed = isotopeS_Alp$delta_18O,
                       a = c(0,10),
                       phi = c(0, 2*pi),
                       k = c(-20,0),

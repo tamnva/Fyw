@@ -94,9 +94,9 @@ convolSineNL <- function(AP = NULL, phiP = NULL, kP = NULL, estAlpha = NULL,
   }
 
   if(printAll){
-    output <- data.frame(date = simDate, simulated = convolIsoConc)
+    output <- tibble::tibble(date = simDate, simulated = convolIsoConc)
   } else {
-    output <- data.frame(date = simulatedDate, simulated = convolIsoConc[comDateLoc])
+    output <- tibble::tibble(date = simulatedDate, simulated = convolIsoConc[comDateLoc])
   }
 
   return(output)

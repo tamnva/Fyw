@@ -58,7 +58,8 @@ nCores = 2, then there will be 2 parallel run on each cores with 5 iterations}
 \item{nWarmupYears}{Number of warmup years}
 }
 \value{
-A data frame of the date and simulated instream isotope concentration
+A list object containing a tibble objects of simulated results, parameter
+set, weighted square error
 }
 \description{
 Fit gamma distribution to observed instream tracer concentratoin

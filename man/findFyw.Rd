@@ -21,7 +21,7 @@ of isotope concentration in streamflow. This function will automatically
 check if phiS > phiP}
 }
 \value{
-A data frame containing different combination of input (AP, phiP, AS,
+A tibble object containing different combination of input (AP, phiP, AS,
 and phiS) and the estimated Fyw, median TT, and alpha, beta of the gamma
 distribution. Column P and S indicates which inputs of precipitation and
 streamflow are used, e.g., P = 1 and S = 3 means that all parameter in this row

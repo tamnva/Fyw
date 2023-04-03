@@ -92,7 +92,7 @@ simIsoStream <- convolSineNL(AP = fitSineP$parameter$a[1],
                              
 # Plot the estimate instream isotope concentration and observed data
 ggplot()+
-  geom_line(data = simIsoStream, aes(x = date, y = simIsoConc, col = "Simulated"))+
+  geom_line(data = simIsoStream, aes(x = date, y = simulated, col = "Simulated"))+
   geom_point(data = isotopeS, aes(x = date, y = O18, col = "Observed"))+
   scale_color_manual(values = c("Simulated" = "blue","Observed" = "black"))+
   labs(x = "", y = "O18 concentrations in streamflow", color = "") +
@@ -108,5 +108,4 @@ ggplot()+
 tauyw = 0.2
 Fyw <- pgamma(tauyw, shape = estAlpha, scale = estBeta, lower = TRUE)
 ```
-
 

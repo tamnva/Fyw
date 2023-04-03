@@ -26,10 +26,12 @@
 #' @param nCores Number of cores for parallel simulation, e.g., if nIter = 10 and
 #' nCores = 2, then there will be 2 parallel run on each cores with 5 iterations
 #' @param nWarmupYears Number of warmup years
-#' @return A data frame of the date and simulated instream isotope concentration
+#' @return A list object containing a tibble objects of simulated results, parameter
+#' set, weighted square error
 #' @details This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
 #' + kP) with the given gamma distribution (user given the shape and scale factor)
 #' and return the simulated isotope concentrations in streamflow
+#' @importFrom foreach %dopar%
 #' @references
 #' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
 #' tracer cycles quantify young water fractions, but not mean transit times,
@@ -56,9 +58,13 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   # Generate nIter number of parametersets within the range of [0,1]
   parameterSet <- lhs :: randomLHS(n = nIter, k = 2)
 
+  # Add column name and convert to tibble
+  colnames(parameterSet) <- c("alpha", "beta")
+  parameterSet <- tibble::as_tibble(parameterSet)
+
   # Convert the generated parameter set to user-defined range
-  parameterSet[,1] <- alphaRange[1] + parameterSet[,1] * (alphaRange[2] - alphaRange[1])
-  parameterSet[,2] <- betaRange[1] + parameterSet[,2] * (betaRange[2] - betaRange[1])
+  parameterSet$alpha <- alphaRange[1] + parameterSet$alpha * (alphaRange[2] -alphaRange[1])
+  parameterSet$beta <- betaRange[1] + parameterSet$beta * (betaRange[2] - betaRange[1])
 
   if (length(AP) != length(phiP) | length(AP) != length(kP)){
     stop("AP, phiP, and AP must be a scalar or vector of the same length")
@@ -66,15 +72,17 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
 
   # Randomly mix AP, phiP, kP with parameterSet
   iloc <- sample.int(length(AP), nIter, replace = TRUE)
-  parameterSet <- data.frame(AP = AP[iloc], phiP = phiP[iloc], kP = kP[iloc],
-                             alpha = parameterSet[,1], beta = parameterSet[,2])
+  parameterSet <- tibble::tibble(AP = AP[iloc], phiP = phiP[iloc], kP = kP[iloc],
+                             alpha = parameterSet$alpha, beta = parameterSet$beta)
 
   # Make cluster
   cl <- parallel::makeCluster(nCores)
   doParallel::registerDoParallel(cl)
 
   # Get instream tracer concentrations by running on nCores
-  simulatedC <- foreach(i = 1:nIter, .combine = cbind, .export=c("convolSineNL")) %dopar% {
+  simulated <- foreach::foreach(i = 1:nIter,
+                        .combine = cbind,
+                        .export=c("convolSineNL")) %dopar% {
     simC <- convolSineNL(AP = parameterSet$AP[i], phiP = parameterSet$phiP[i],
                          kP = parameterSet$kP[i], estAlpha = parameterSet$alpha[i],
                          estBeta = parameterSet$beta[i], simulatedDate = simulatedDate,
@@ -83,33 +91,44 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   }
 
   # Close cluster
-  stopCluster(cl)
+  parallel::stopCluster(cl)
 
-  # Calculate square error
-  squareErr <- rep(NA, nIter)
+  # Calculate mean (weighted) square error
+  weightedMSE <- rep(NA, nIter)
   for (i in 1:nIter){
     if(is.null(weight)){
-      squareErr[i] <- sum((simulatedC[,i] - fittedData)^2)
+      weightedMSE[i] <- mean((simulatedC[,i] - fittedData)^2)
     } else {
-      squareErr[i] <- sum(weight * (simulatedC[,i] - fittedData)^2)
+      weightedMSE[i] <- mean(weight * (simulatedC[,i] - fittedData)^2)
     }
   }
 
   # Ranking results by decreasing square error
-  rankingDecreasing <- order(squareErr, decreasing = FALSE)
+  rankingDecreasing <- order(weightedMSE, decreasing = FALSE)
 
   # Sort simulated results by decreasing square error
-  simulatedC <- as.data.frame(simulatedC[,rankingDecreasing])
-  colnames(simulatedC) <- paste0("simulation_", c(1:ncol(simulatedC)))
+  simulated <- simulated[,rankingDecreasing]
+  colnames(simulated) <- paste0("simulation_", c(1:ncol(simulated)))
 
-  date <- simulatedDate
+  date <- rep(simulatedDate, nBestIter)
   parameterSet <- parameterSet[rankingDecreasing,]
 
   # Create output object
   output <- list()
-  output$simulatedC <- cbind(date, simulatedC[,1:nBestIter])
+
+  # convert simulated to tibble
+  output$simulated <- tibble::as_tibble(simulated[,1:nBestIter])
+
+  # Stack and change column name
+  output$simulated <- tibble::as_tibble(stack(output$simulated))
+  colnames(output$simulated) <- c("simulated", "simulation")
+
+  # Add date to simulated result
+  output$simulated <- tibble::add_column(output$simulated, date = date, .before = 1)
+
+  # Save parameter set and square error
   output$parameterSet <- parameterSet[1:nBestIter,]
-  output$squareErr <- squareErr[rankingDecreasing][1:nBestIter]
+  output$weightedMSE <- weightedMSE[rankingDecreasing][1:nBestIter]
 
   return(output)
 }

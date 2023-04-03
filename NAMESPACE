@@ -2,8 +2,9 @@
 
 export(IRLS)
 export(convolSineNL)
-export(findAlphaBeta)
+export(findAlphaBetaMTT)
 export(findFyw)
 export(findtauyw)
 export(fitGamma)
 export(fitSineNL)
+importFrom(foreach,"%dopar%")

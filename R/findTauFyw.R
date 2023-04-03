@@ -4,10 +4,14 @@
 #' @param beta A scalar or vector of the scale factor of the gamma distribution
 #' phiS MUST be smaller than phiP
 #' @param Fyw A scalar or vector of the o the youngwater fraction
+#' @param method A character variable, either "approximation" or "direct".
+#' "approximation" mean that alpha is estimated diretly form alpha only
+#' (see Eq. 14, Kirchner, 2016)."direct" means tauyw is estimated by alpha, beta,
+#' and Fyw using Eq. 13 (Kirchner, 2016).
 #' @param eps The minimum search distance, default value is 1e-6. In other words,
 #' if the next tauyw values changes within this range compared to the previous value
 #' the function will stop and return the next tauyw value
-#' @return Return a data frame object of the age threshold of youngwater fraction
+#' @return Return a tibble object containing the age threshold of youngwater fraction
 #' (tauyw) in years. This data frame also contains input.
 #' @details In this function, we solve equation 13 (Kirchner et al., 2013) with
 #' given alpha (shape), beta (scale), and youngwater fraction (Fyw). The result is
@@ -20,12 +24,14 @@
 #' @examples
 #' findtauyw(alpha = 1.0,
 #'           beta = 2.0,
-#'           Fyw = 0.25)
+#'           Fyw = 0.25,
+#'           method = "approximation")
 #' @export
 
 findtauyw <- function(alpha = NULL,
                       beta = NULL,
                       Fyw = NULL,
+                      method = "direct",
                       eps = 1e-6){
 
   # check alpha factor is null
@@ -66,45 +72,61 @@ findtauyw <- function(alpha = NULL,
   # Initial output (tauyw)
   output <- c()
 
-  # Loop over the length of alpha
-  for (i in 1:length(alpha)){
-    tauywMin <- 0
-    tauywMax <- 100.0
-    tauyw <- (tauywMax + tauywMin)/2
+  if (method == "approximation"){
 
-    minVal <- f(tauywMin, i)
-    maxVal <- f(tauywMax, i)
-    midVal <- f(tauyw, i)
-
-    while (tauywMax - tauywMin > eps){
-
-      if (maxVal * minVal > 0){
-        stop("Cannot find tauyw within the range of [0,100] years")
-      }
-
-      # check if found exact solution
-      if (midVal == 0){
-        stop("Find exact solution")
-      }
-
-      # update min max aplpha value
-      if ((minVal * midVal) < 0){
-        tauywMax <- tauyw
-        maxVal <- midVal
+    for (i in 1:length(alpha)){
+      if ((alpha[i] <= 2) & (alpha[i] >= 0.2)){
+        output <- c(output, 0.0949+0.1065*alpha - 0.0126*alpha^2)
       } else {
-        tauywMin <- tauyw
-        minVal <- midVal
+        print(paste0("cannot estimate tauyw for alpha = ", alpha[i]))
+        print("becaue alpha is out of the range [0.2,2], return NA")
+        output <- c(output, NA)
+      }
+    }
+  } else if (method == "direct") {
+    # Loop over the length of alpha
+    for (i in 1:length(alpha)){
+      tauywMin <- 0
+      tauywMax <- 100.0
+      tauyw <- (tauywMax + tauywMin)/2
+
+      minVal <- f(tauywMin, i)
+      maxVal <- f(tauywMax, i)
+      midVal <- f(tauyw, i)
+
+      while (tauywMax - tauywMin > eps){
+
+        if (maxVal * minVal > 0){
+          stop("Cannot find tauyw within the range of [0,100] years")
+        }
+
+        # check if found exact solution
+        if (midVal == 0){
+          stop("Find exact solution")
+        }
+
+        # update min max aplpha value
+        if ((minVal * midVal) < 0){
+          tauywMax <- tauyw
+          maxVal <- midVal
+        } else {
+          tauywMin <- tauyw
+          minVal <- midVal
+        }
+
+        tauyw <- (tauywMax + tauywMin)/2
+        midVal <- f(tauyw, i)
       }
 
-      tauyw <- (tauywMax + tauywMin)/2
-      midVal <- f(tauyw, i)
+      output <- c(output, tauyw)
     }
-
-    output <- c(output, tauyw)
+  } else {
+    stop("The given method is unknow, only 'approximation' or 'direct' is allowed")
   }
 
+
   # output as data frame, including input
-  output <- data.frame(alpha = alpha, beta = beta, Fyw = Fyw, tauyw = output)
+  output <- tibble::tibble(alpha = alpha, beta = beta, Fyw = Fyw, tauyw = output)
 
   return(output)
 }

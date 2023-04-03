@@ -4,7 +4,13 @@
 \alias{findtauyw}
 \title{Find findtauyw using bisection approach}
 \usage{
-findtauyw(alpha = NULL, beta = NULL, Fyw = NULL, eps = 1e-06)
+findtauyw(
+  alpha = NULL,
+  beta = NULL,
+  Fyw = NULL,
+  method = "direct",
+  eps = 1e-06
+)
 }
 \arguments{
 \item{alpha}{A scalar or vector of the shape factor of the gamma distribution}
@@ -14,12 +20,17 @@ phiS MUST be smaller than phiP}
 
 \item{Fyw}{A scalar or vector of the o the youngwater fraction}
 
+\item{method}{A character variable, either "approximation" or "direct".
+"approximation" mean that alpha is estimated diretly form alpha only
+(see Eq. 14, Kirchner, 2016)."direct" means tauyw is estimated by alpha, beta,
+and Fyw using Eq. 13 (Kirchner, 2016).}
+
 \item{eps}{The minimum search distance, default value is 1e-6. In other words,
 if the next tauyw values changes within this range compared to the previous value
 the function will stop and return the next tauyw value}
 }
 \value{
-Return a data frame object of the age threshold of youngwater fraction
+Return a tibble object containing the age threshold of youngwater fraction
 (tauyw) in years. This data frame also contains input.
 }
 \description{
@@ -33,7 +44,8 @@ the age threshold of youngwater fraction (tauyw) in years
 \examples{
 findtauyw(alpha = 1.0,
           beta = 2.0,
-          Fyw = 0.25)
+          Fyw = 0.25,
+          method = "approximation")
 }
 \references{
 Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal

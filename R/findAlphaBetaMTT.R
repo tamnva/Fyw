@@ -1,4 +1,4 @@
-#' Find findAlphaBeta using bisection approach
+#' Find alpha, beta, and mean TT
 #' @description Find alpha (shape) and beta (scale) factors of the gamma
 #' distriubtion using the bisection approach. Solve equations (10) and (11) in
 #' Kirchner (2016).
@@ -9,27 +9,21 @@
 #' @param AP The amplitude of the sine-wave function of isotope concentration in
 #' streamflow. AP MUST be > 0
 #' @param eps The minimum search distance
-#' @return A list object containing the shape (alpha), scale (beta) factors,
-#' and also mean transit time
+#' @return A tiblle object containing the alpha, beta, and mean transit time
 #' @references
 #' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
 #' tracer cycles quantify young water fractions, but not mean transit times,
 #' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
 #' https://doi.org/10.5194/hess-20-279-2016.
 #' @examples
-#' result <- findAlphaBeta(phiS_phiP = pi,
+#' result <- findAlphaBetaMTT(phiS_phiP = pi,
 #'                         AS = 1.0,
 #'                         AP = 2.0,
 #'                         eps = 1e-6)
-#' # alpha (shape) factor
-#' result$alpha
-#' # beta (scale) factor
-#' result$beta
-#' # Mean transit time (years)
-#' result$meanTT
+#' result
 #' @export
 
-findAlphaBeta <- function(phiS_phiP = NULL,
+findAlphaBetaMTT <- function(phiS_phiP = NULL,
                           AS = NULL,
                           AP = NULL,
                           eps = 1e-6){
@@ -86,12 +80,12 @@ findAlphaBeta <- function(phiS_phiP = NULL,
     midVal <- f(alpha)
   }
 
-  output <- list()
-  output$alpha <- alpha
+  # Output tibble
+  output <- tibble::tibble(alpha = alpha,
+                           beta = (1/(2*pi*1))*sqrt((AS/AP)^(-2/alpha) - 1))
 
-  # Also find beta using equation 10 (Kirchner, 2016), f = 1 for seasonal cycle
-  output$beta <- (1/(2*pi*1))*sqrt((AS/AP)^(-2/alpha) - 1)
-  output$meanTT <- output$alpha * output$beta
+  # Add mean transit time to output
+  output <- tibble::add_column(output, meanTT = output$alpha * output$beta)
 
   return(output)
 }
