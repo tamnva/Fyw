@@ -16,7 +16,8 @@ fitGamma(
   nIter = 5000,
   nBestIter = 30,
   nCores = 1,
-  nWarmupYears = NULL
+  nWarmupYears = NULL,
+  setSeed = NULL
 )
 }
 \arguments{
@@ -58,6 +59,9 @@ this function.}
 nCores = 2, then there will be 2 parallel run on each cores with 5 iterations}
 
 \item{nWarmupYears}{Number of warmup years}
+
+\item{setSeed}{An integer number used for set.seed() to have a reproducible
+results.}
 }
 \value{
 A list object containing a tibble objects of simulated results, parameter

@@ -12,7 +12,8 @@ fitSineNL(
   t = NULL,
   nIter = 50000,
   nBestIter = 30,
-  weight = rep(1, length(observed))
+  weight = rep(1, length(observed)),
+  setSeed = NULL
 )
 }
 \arguments{
@@ -45,6 +46,9 @@ fit with observed based on square error, then save all outputs from nBestIter.}
 with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
 input is given, all of the weight is 1 (meaning equal weight/unweight - this
 case for calculating the unweighted Fyw).}
+
+\item{setSeed}{An integer number used for set.seed() to have a reproducible
+results.}
 }
 \value{
 A list of object

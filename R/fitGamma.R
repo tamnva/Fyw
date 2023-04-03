@@ -27,6 +27,8 @@
 #' @param nCores Number of cores for parallel simulation, e.g., if nIter = 10 and
 #' nCores = 2, then there will be 2 parallel run on each cores with 5 iterations
 #' @param nWarmupYears Number of warmup years
+#' @param setSeed An integer number used for set.seed() to have a reproducible
+#' results.
 #' @return A list object containing a tibble objects of simulated results, parameter
 #' set, weighted square error
 #' @details This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
@@ -55,7 +57,10 @@
 fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
                      betaRange = NULL, simulatedDate = NULL, fittedData = NULL,
                      weight = NULL, nIter = 5000, nBestIter = 30, nCores = 1,
-                     nWarmupYears = NULL){
+                     nWarmupYears = NULL, setSeed = NULL){
+
+  # Set seed if provided
+  if (!is.null(setSeed)) set.seed(setSeed)
 
   # Generate nIter number of parametersets within the range of [0,1]
   parameterSet <- lhs :: randomLHS(n = nIter, k = 2)
@@ -71,6 +76,9 @@ fitGamma <- function(AP = NULL, phiP = NULL, kP = NULL, alphaRange = NULL,
   if (length(AP) != length(phiP) | length(AP) != length(kP)){
     stop("AP, phiP, and AP must be a scalar or vector of the same length")
   }
+
+  # Set seed if provided
+  if (!is.null(setSeed)) set.seed(setSeed)
 
   # Randomly mix AP, phiP, kP with parameterSet
   iloc <- sample.int(length(AP), nIter, replace = TRUE)

@@ -120,6 +120,6 @@ ggplot()+
 # Let's say we want to know the Fyw with age thresholds of tauyw = 0.2 years
 # This Fyw (weighted) because Step 1 we used the weights = isotopeP$precippitation_mm
 tauyw = 0.2
-Fyw <- pgamma(tauyw, shape = estAlpha, scale = estBeta, lower = TRUE)
+Fyw <- pgamma(tauyw, shape = estAlpha, scale = estBeta, lower.tail = TRUE)
 ```
 

@@ -22,6 +22,8 @@
 #' with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
 #' input is given, all of the weight is 1 (meaning equal weight/unweight - this
 #' case for calculating the unweighted Fyw).
+#' @param setSeed An integer number used for set.seed() to have a reproducible
+#' results.
 #' @importFrom stats cor
 #' @details Fitting non linear sine function of the following form: \cr
 #' y = a * sin(2 * pi * t + phi) + k
@@ -50,7 +52,8 @@
                        t = NULL,
                        nIter = 50000,
                        nBestIter = 30,
-                       weight = rep(1, length(observed))){
+                       weight = rep(1, length(observed)),
+                       setSeed = NULL){
 
    # Check if date input is supplied as date (yyyy-mm-dd)
    if (is.null(t)){
@@ -60,6 +63,9 @@
        stop("t must be in format: yyyy-mm-dd")
      }
    }
+
+   # Set seed if provided
+   if (!is.null(setSeed)) set.seed(setSeed)
 
    # Generate random parameter set using uniform latin hypercube sampling
    parameterSet <- lhs :: randomLHS(nIter,3)
