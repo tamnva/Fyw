@@ -63,8 +63,11 @@
 
    # Generate random parameter set using uniform latin hypercube sampling
    parameterSet <- lhs :: randomLHS(nIter,3)
-   parameterSet <- tibble::as_tibble(parameterSet)
    colnames(parameterSet) <- c("a", "phi", "k")
+
+   # Convert to tibble
+   parameterSet <- tibble::as_tibble(parameterSet)
+
 
    # Convert to user-defined range
    parameterSet$a <- a[1] +  parameterSet$a * (a[2] - a[1])

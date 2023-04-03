@@ -5,7 +5,7 @@
 
 ## 1. Overview
 
-- Fyw package provides several functions for finding the youngwater fraction and its related parameters (e.g., alpha, beta of the gamma distribution, age threshold of the youngwater fraction)
+- Fyw package provides several functions for finding the youngwater fraction and its related parameters (e.g., alpha, beta of the gamma distribution, age threshold of the young water fraction).
 
 ## 2. Installation
 
@@ -55,7 +55,7 @@ DISADVANTAGE: Very high computational demand
 ### Step 1. Fit observed O18 in precipitation to sine wave function
 
 ``` r
-# Get isotope data in precipitation of the Alp catchment
+# Get isotope data in precipitation (Alp catchment)
 isotopeP_Alp <- subset(isotopeData, catchment == "Alp" & 
                        variable == "precipitation")
 
@@ -77,30 +77,39 @@ ggplot()+
   theme(legend.position = "none")
 
 # Plot parameter values (only for nBestIter)
+
+ggplot(stack(fitSineP$parameter[,-c(1)]))+
+  geom_boxplot(aes(x = ind, y = values, fill = ind))+
+  labs(x = "", y = "parameter value", fill = "") +  
+  facet_wrap(. ~ ind, scales = "free")+
+  theme(legend.position = "top")
 ```
 
 ### Step 2. Convolve the fitted sine wave with the gamma distribution 
 ``` r
+# Get isotope data in streamflow (Alp catchment)
+isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & 
+                         variable == "streamflow")
+
 # Let's estimate parameters of the gamma distribution (trial and error)
 estAlpha = 0.9
 estBeta = 0.12
 
-# Now use this estimated alpha and beta of the gamma distribution for simulating
 # isotope concentrations in streamflow
 simIsoStream <- convolSineNL(AP = fitSineP$parameter$a[1],
                              phiP = fitSineP$parameter$phi[1], 
                              kP = fitSineP$parameter$k[1], 
                              estAlpha = estAlpha,
                              estBeta = estBeta, 
-                             simulatedDate = isotopeS$date,
+                             simulatedDate = isotopeS_Alp$date,
                              nWarmupYears = 5)
-                             
+
 # Plot the estimate instream isotope concentration and observed data
 ggplot()+
   geom_line(data = simIsoStream, aes(x = date, y = simulated, col = "Simulated"))+
-  geom_point(data = isotopeS, aes(x = date, y = O18, col = "Observed"))+
+  geom_point(data = isotopeS_Alp, aes(x = date, y = delta_18O, col = "Observed"))+
   scale_color_manual(values = c("Simulated" = "blue","Observed" = "black"))+
-  labs(x = "", y = "O18 concentrations in streamflow", color = "") +
+  labs(x = "", y = expression(paste(delta^{18}, "O streamflow (‰)")), color = "") +
   theme(legend.position = "top")
   
 # NOTE: Above, we are lucky, the estimated instream isotope concentrations match
