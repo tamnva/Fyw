@@ -1,10 +1,10 @@
 #' Convolve the sine-wave function with the gamma distribution function
 #'
-#' @param AP Amplitude of the sine wave (cP = AP*sin(2*pi*t + phiP) + kP) of
+#' @param AP Amplitude of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
 #' tracer concentration in precipitation.
-#' @param phiP Phase shift of the sine wave (cP = AP*sin(2*pi*t + phiP) + kP) of
+#' @param phiP Phase shift of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
 #' tracerconcentration in precipitation.
-#' @param kP The constant factor of sine wave (cP = AP*sin(2*pi*t + phiP) + kP)
+#' @param kP The constant factor of sine wave (cP = AP*sin(2*pi*t - phiP) + kP)
 #' of tracer concentration in precipitation.
 #' @param estAlpha The 'user' estimated alpha (shape) of the gamma distribution
 #' function used for the convolution approach
@@ -43,7 +43,7 @@ convolSineNL <- function(AP = NULL, phiP = NULL, kP = NULL, estAlpha = NULL,
 
   # Sine function in form c = A sin (2*pi*t - phi) + k
   sineNL <- function(time, AP, phiP, kP){
-    AP * sin(2*pi*time + phiP) + kP
+    AP * sin(2*pi*time - phiP) + kP
   }
 
   # check input data is null

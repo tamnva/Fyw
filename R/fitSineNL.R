@@ -26,7 +26,7 @@
 #' results.
 #' @importFrom stats cor
 #' @details Fitting non linear sine function of the following form: \cr
-#' y = a * sin(2 * pi * t + phi) + k
+#' y = a * sin(2 * pi * t - phi) + k
 #' @return A list of object
 #' @seealso
 #' toDecimal, randomLHS
@@ -92,7 +92,7 @@
    for (i in 1:nIter){
 
      # Calculate the predict isotope concentration
-     simulated <- parameterSet$a[i] * sin(2*pi*tDecimal + parameterSet$phi[i]) + parameterSet$k[i]
+     simulated <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
 
      # Calculate sum or square error (with weight)
      weightedMSE <- c(weightedMSE, mean(weight * (simulated - observed)^2))
@@ -108,7 +108,7 @@
    Rsquare <- c()
 
    for (i in 1:nBestIter){
-     temp <- parameterSet$a[i] * sin(2*pi*tDecimal + parameterSet$phi[i]) + parameterSet$k[i]
+     temp <- parameterSet$a[i] * sin(2*pi*tDecimal - parameterSet$phi[i]) + parameterSet$k[i]
      simulated <- c(simulated, temp)
      simulation <- c(simulation, rep(paste0("simulation_",i), length(observed)))
      Rsquare <- c(Rsquare, cor(x = observed, y =  temp)^2)

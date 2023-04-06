@@ -40,30 +40,6 @@ findtauyw <- function(alpha = NULL,
     stop("alpha factor cannot be NULL")
   }
 
-  # check if beta factor is null
-  if (is.null(beta)){
-    stop("beta factor cannot be NULL")
-  }
-
-  # check if Fyw is null
-  if (is.null(Fyw)){
-    stop("Fyw cannot be NULL")
-  }
-
-  # check if all Fyw <= 1
-  if (!all(Fyw <= 1)){
-    stop("Fyw must be <= 1")
-  }
-
-  # check if all Fyw >= 0
-  if (!all(Fyw >= 0)){
-    stop("Fyw must be >= 0")
-  }
-
-  # check if length of alpha, beta, and Fyw are equal
-  if (length(alpha) != length(beta) | length(alpha) != length(Fyw)){
-    stop("Input vectors alpha, beta, and Fyw must have the same length")
-  }
 
   # define function need to be found the root
   f <- function(tauyw, i){
@@ -127,7 +103,11 @@ findtauyw <- function(alpha = NULL,
 
 
   # output as data frame, including input
-  output <- tibble::tibble(alpha = alpha, beta = beta, Fyw = Fyw, tauyw = output)
+  if (method == "approximation"){
+    output <- tibble::tibble(alpha = alpha, tauyw = output)
+  } else {
+    output <- tibble::tibble(alpha = alpha, beta = beta, Fyw = Fyw, tauyw = output)
+  }
 
   return(output)
 }
