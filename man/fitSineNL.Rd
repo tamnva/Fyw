@@ -58,7 +58,7 @@ Fit a nonlinear sine wave function
 }
 \details{
 Fitting non linear sine function of the following form: \cr
-y = a * sin(2 * pi * t + phi) + k
+y = a * sin(2 * pi * t - phi) + k
 }
 \examples{
 #Get isotope data in streamflow of the Alp catchment (from the example dataset)
