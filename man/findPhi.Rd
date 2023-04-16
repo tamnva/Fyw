@@ -2,7 +2,7 @@
 % Please edit documentation in R/findPhi.R
 \name{findPhi}
 \alias{findPhi}
-\title{Find phiP within the range of 0 and 2pi}
+\title{Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}}
 \usage{
 findPhi(aP = NULL, bP = NULL)
 }
@@ -13,16 +13,16 @@ findPhi(aP = NULL, bP = NULL)
 phiS MUST be smaller than phiP}
 }
 \value{
-A single phiP value within the raange of [0, 2*pi]
+A single phiP value within the range of \eqn{[0, 2\pi]}
 }
 \description{
-Find phiP within the range of 0 and 2pi
+Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
 }
 \details{
-This function find root of the following system of equations for phiP
-that within the range of [0, 2*pi] given values of aP and bP
-aP <- - sqrt(aP^2 + bP^2) * sin(phiP) = -Ap*sin(phiP)
-bP <- sqrt(aP^2 + bP^2) * cos(phiP) = Ap*cos(phiP)
+This function finds root of the following system of equations for \eqn{\varphi_P}
+that within the range of \eqn{[0, 2\pi]}{} given values of aP and bP \cr
+\deqn{a_P = - \sqrt{a_P^2 + b_P^2} \cdot sin(\varphi_P) = -A_p \cdot sin(\varphi_P)}{}
+\deqn{b_P = \sqrt{a_P^2 + b_P^2} \cdot cos(\varphi_P) = A_p \cdot cos(\varphi_P))}{}
 }
 \examples{
 Ap <- 2.5

@@ -1,13 +1,13 @@
-#' Find phiP within the range of 0 and 2pi
+#' Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
 #'
 #' @param aP A scalar or vector of the shape factor of the gamma distribution
 #' @param bP A scalar or vector of the scale factor of the gamma distribution
 #' phiS MUST be smaller than phiP
-#' @return A single phiP value within the raange of [0, 2*pi]
-#' @details This function find root of the following system of equations for phiP
-#' that within the range of [0, 2*pi] given values of aP and bP
-#' aP <- - sqrt(aP^2 + bP^2) * sin(phiP) = -Ap*sin(phiP)
-#' bP <- sqrt(aP^2 + bP^2) * cos(phiP) = Ap*cos(phiP)
+#' @return A single phiP value within the range of \eqn{[0, 2\pi]}
+#' @details This function finds root of the following system of equations for \eqn{\varphi_P}
+#' that within the range of \eqn{[0, 2\pi]}{} given values of aP and bP \cr
+#' \deqn{a_P = - \sqrt{a_P^2 + b_P^2} \cdot sin(\varphi_P) = -A_p \cdot sin(\varphi_P)}{}
+#' \deqn{b_P = \sqrt{a_P^2 + b_P^2} \cdot cos(\varphi_P) = A_p \cdot cos(\varphi_P))}{}
 #' @references
 #' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
 #' tracer cycles quantify young water fractions, but not mean transit times,
@@ -22,6 +22,8 @@
 #' findPhi(aP = -Ap*sin(phiP), bP = Ap*cos(phiP))
 #' # This function should return phiP = 2*pi - 0.1
 #' @export
+
+# devtools::document() run create md
 
 findPhi <- function(aP = NULL, bP = NULL){
   phiP <- atan(-aP/bP)

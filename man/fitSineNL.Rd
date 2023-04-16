@@ -17,7 +17,7 @@ fitSineNL(
 )
 }
 \arguments{
-\item{observed}{A numeric vectors containing values of the dependent variables, this
+\item{observed}{A numeric vector containing values of the dependent variables, this
 could be measure isotope concentration in precipitation (or streamflow).}
 
 \item{a}{A numeric vector with positive numbers, representing the maximum and

@@ -1,6 +1,6 @@
 #' Fit a nonlinear sine wave function
 #'
-#' @param observed A numeric vectors containing values of the dependent variables, this
+#' @param observed A numeric vector containing values of the dependent variables, this
 #' could be measure isotope concentration in precipitation (or streamflow).
 #' @param a A numeric vector with positive numbers, representing the maximum and
 #' minimum search range for the amplitude A of cycle of isotope concentrations
