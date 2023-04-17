@@ -26,3 +26,8 @@ install_github("tamnva/Fyw", build_vignettes = TRUE)
 
 Please see the package vignettes
 
+### References
+
+Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1: Seasonal 
+Tracer Cycles Quantify Young Water Fractions, but Not Mean Transit Times, in 
+Spatially Heterogeneous Catchments.” Hydrology and Earth System Sciences 20 (1): 279–97. https://doi.org/10.5194/hess-20-279-2016.
