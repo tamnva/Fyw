@@ -1,9 +1,12 @@
-#' Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
+#' Find \eqn{\varphi}
 #'
 #' @param aP A first scalar (see Details)
 #' @param bP A second scalar (see Details)
 #'
 #' @return A single phiP value within the range of \eqn{[0, 2\pi]}.
+#'
+#' @description
+#' Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
 #'
 #' @details
 #' Given the sine function (e.g., Eq. 4 in Kirchner, (2016)): \cr

@@ -28,6 +28,10 @@ Please see the package vignettes
 
 ### References
 
-Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1: Seasonal 
-Tracer Cycles Quantify Young Water Fractions, but Not Mean Transit Times, in 
-Spatially Heterogeneous Catchments.” Hydrology and Earth System Sciences 20 (1): 279–97. https://doi.org/10.5194/hess-20-279-2016.
+1. Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal tracer cycles quantify young water fractions, but not mean transit times, in spatially heterogeneous catchments. *Hydrol. Earth Syst. Sci.*, 20, 279–297. https://doi.org/10.5194/hess-20-279-2016.
+
+2. von Freyberg, J., Rücker, A., Zappa, M., Schlumpf, A., Studer, B., Kirchner, J. W.  (2022). Four years of daily stable water isotope data in stream water and precipitation from three Swiss catchments. *Sci. Data*, 9(46). https://doi.org/10.1038/s41597-022-01148-1.
+
+3. von Freyberg, J., Allen, S. T., Seeger, S., Weiler, M., and Kirchner, J. W. (2018). Sensitivity of young water fractions to hydro-climatic forcing and landscape properties across 22 Swiss catchments. *Hydrol. Earth Syst. Sci.*, 22,
+   3841–3861. https://doi.org/10.5194/hess-22-3841-2018-supplement.
+

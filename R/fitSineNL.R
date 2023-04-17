@@ -1,4 +1,7 @@
-#' Fitting observed data to a non-linear sine-wave function
+#' Non-linear sine wave fitting
+#'
+#' @description
+#' Fitting a non-linear sine-wave function to observed data.
 #'
 #' @param observed A numeric vector containing values of the dependent variables, this
 #' could be observed isotope in precipitation (or streamflow).

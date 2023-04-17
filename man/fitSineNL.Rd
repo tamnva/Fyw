@@ -2,7 +2,7 @@
 % Please edit documentation in R/fitSineNL.R
 \name{fitSineNL}
 \alias{fitSineNL}
-\title{Fitting observed data to a non-linear sine-wave function}
+\title{Non-linear sine wave fitting}
 \usage{
 fitSineNL(
   observed = NULL,
@@ -58,7 +58,7 @@ mean square error between simulated and observed data), and (4) a table of the p
 of the fitted sine-wave.
 }
 \description{
-Fitting observed data to a non-linear sine-wave function
+Fitting a non-linear sine-wave function to observed data.
 }
 \details{
 The non-linear sine wave function used for fitting has the following

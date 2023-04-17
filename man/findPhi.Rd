@@ -2,7 +2,7 @@
 % Please edit documentation in R/findPhi.R
 \name{findPhi}
 \alias{findPhi}
-\title{Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}}
+\title{Find \eqn{\varphi}}
 \usage{
 findPhi(aP = NULL, bP = NULL)
 }
