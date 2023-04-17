@@ -74,6 +74,3 @@ fitSineS <- fitSineNL(observed = isotopeS_Alp$delta_18O,
                       nBestIter = 2,
                       weight = isotopeS_Alp$water_flux_mm)
 }
-\seealso{
-toDecimal, randomLHS
-}

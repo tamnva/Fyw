@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 ```{r setup, message=FALSE}
 # Load require packages
 library(Fyw)
-library(ggplot2)
+
+# Uncomment if users want to see the plots
+# library(ggplot2)   
 ```
 
 ### 1. Overview
@@ -56,11 +58,11 @@ fitSineP <- fitSineNL(observed = isotopeP$delta_18O,
                       setSeed = 2023)
 
 # Plot the results (fitted sine wave and observed)
-ggplot(fitSineP$simulated)+
-  geom_line(aes(x = date, y = simulated, color = simulation)) +         # 10 best fitted sine waves
-  geom_point(data = fitSineP$observed, aes(x = date, y = observed)) +   # observed data
-  labs(x = "", y = expression(paste(delta^{18}, "O in precipitation (‰)"))) +
-  theme(legend.position = "none")
+# ggplot(fitSineP$simulated)+
+#  geom_line(aes(x = date, y = simulated, color = simulation)) +         # 10 best fitted sine waves
+#  geom_point(data = fitSineP$observed, aes(x = date, y = observed)) +   # observed data
+#  labs(x = "", y = expression(paste(delta^{18}, "O in precipitation (‰)"))) +
+#  theme(legend.position = "none")
 ```
 
 -   Step 2: Find parameters of the gamma distribution (alpha, beta) by convolution
@@ -93,11 +95,11 @@ fitGamma <- fitGamma(AP = fitSineP$parameter$a,
                      setSeed = 2023)
 
 # Plot to see the quality of fit
-ggplot()+
-  geom_point(data = isotopeS, aes(x = date, y = delta_18O), alpha = 0.35) +                  # Observed
-  geom_line(data = fitGamma$simulated, aes(x = date, y = simulated, color = simulation)) +   # Simulated
-  labs(x = "", y = expression(paste(delta^{18}, "O in streamflow (‰)"))) +
-  theme(legend.position = "none")
+# ggplot()+
+#   geom_point(data = isotopeS, aes(x = date, y = delta_18O), alpha = 0.35) +                  # Observed
+#  geom_line(data = fitGamma$simulated, aes(x = date, y = simulated, color = simulation)) +   # Simulated
+#  labs(x = "", y = expression(paste(delta^{18}, "O in streamflow (‰)"))) +
+#  theme(legend.position = "none")
 ```
 
 -   Step 3: Now calculate the young water fraction with user defined age threshold (please see Eq. 13; Kirchner, (2016))

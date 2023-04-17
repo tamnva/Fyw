@@ -25,11 +25,10 @@
 #' @param setSeed An integer number used for set.seed() to have a reproducible
 #' results.
 #' @importFrom stats cor
+#' @importFrom tibble as_tibble
 #' @details Fitting non linear sine function of the following form: \cr
 #' y = a * sin(2 * pi * t - phi) + k
 #' @return A list of object
-#' @seealso
-#' toDecimal, randomLHS
 #' @examples
 #' #Get isotope data in streamflow of the Alp catchment (from the example dataset)
 #' isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
@@ -73,7 +72,6 @@
 
    # Convert to tibble
    parameterSet <- tibble::as_tibble(parameterSet)
-
 
    # Convert to user-defined range
    parameterSet$a <- a[1] +  parameterSet$a * (a[2] - a[1])
