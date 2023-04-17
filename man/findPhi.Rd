@@ -18,13 +18,13 @@ A single phiP value within the range of \eqn{[0, 2\pi]}.
 Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
 }
 \details{
-Given the sine function: \cr
+Given the sine function (e.g., Eq. 4 in Kirchner, (2016)): \cr
 \deqn{c_P = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}{}
 
-which can be rewritten as follows \cr:
+which can be rewritten as follows (e.g., Eq. 5 in Kirchner, (2016)): \cr
  \deqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}{}
 
-where \cr:
+where: \cr
 \deqn{a_P = -A_p \cdot sin(\varphi_P)}{}
 \deqn{b_P = A_p \cdot cos(\varphi_P)}{}
 
