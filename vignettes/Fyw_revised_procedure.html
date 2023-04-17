@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Fyw estimation using the revised procedure</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Fyw estimation using the revised
+procedure</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load require packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Fyw)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div id="overview" class="section level3">
+<h3>1. Overview</h3>
+<p>This document describes how the young water fraction is calculated
+based on the revised procedure (from this package).</p>
+<p>First we need data for this demonstration. Let’s take the isotope
+data from the Alp catchment.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get isotope in precipitation (P) and streamflow (S) from the the Alp catchment</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>isotopeP <span class="ot">&lt;-</span> <span class="fu">subset</span>(isotopeData, catchment <span class="sc">==</span> <span class="st">&quot;Alp&quot;</span> <span class="sc">&amp;</span> variable <span class="sc">==</span> <span class="st">&quot;precipitation&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>isotopeS <span class="ot">&lt;-</span> <span class="fu">subset</span>(isotopeData, catchment <span class="sc">==</span> <span class="st">&quot;Alp&quot;</span> <span class="sc">&amp;</span>  variable <span class="sc">==</span> <span class="st">&quot;streamflow&quot;</span>)</span></code></pre></div>
+</div>
+<div id="fyw-estimation-using-the-revised-procedure" class="section level3">
+<h3>2. Fyw estimation using the revised procedure</h3>
+<p>In the revised procedure, Fyw is estimated using the following
+steps:</p>
+<ul>
+<li><strong>Step 1</strong>: Fit the sine wave to observed isotope in
+precipitation. The fitted sine wave has the following form (please see
+Eq. 4; Kirchner, (2016)):</li>
+</ul>
+<p><span class="math display">\[ c_P = A_P \cdot sin(2 \pi t +
+\varphi_P)  + k_P \]</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------#</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#             Fit sine wave to observed isotope in precipitation               #</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#------------------------------------------------------------------------------#</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fitSineP <span class="ot">&lt;-</span> <span class="fu">fitSineNL</span>(<span class="at">observed =</span> isotopeP<span class="sc">$</span>delta_18O,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">a =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">phi =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">12</span>,<span class="sc">-</span><span class="dv">8</span>), </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">t =</span> isotopeP<span class="sc">$</span>date,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nIter =</span> <span class="dv">10000</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">nBestIter =</span> <span class="dv">10</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weight =</span> isotopeP<span class="sc">$</span>water_flux_mm,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                      <span class="at">setSeed =</span> <span class="dv">2023</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results (fitted sine wave and observed)</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fitSineP<span class="sc">$</span>simulated)<span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> simulated, <span class="at">color =</span> simulation)) <span class="sc">+</span>         <span class="co"># 10 best fitted sine waves</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> fitSineP<span class="sc">$</span>observed, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> observed)) <span class="sc">+</span>   <span class="co"># observed data</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(delta<span class="sc">^</span>{<span class="dv">18</span>}, <span class="st">&quot;O in precipitation (‰)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<ul>
+<li>Step 2: Find parameters of the gamma distribution (alpha, beta) by
+convolution of the fitted sine wave to isotope in precipitation (step 1)
+with the gamma functions (please see Eq. 4; Kirchner, (2016)) and
+evaluate the goodness-of-fit with observed isotope in streamflow. The
+following code was not run because time-consuming.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: Due to high computational demand, here I set nIter = 4 and nWarmupYears = 5</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#       but to have a better fit nIter should be large (e.g, 2000), </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#       and nWarmupYears should be large (e.g., 10) to reduce the impact of initial conditions</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       and the alphaRange, betaRange should be larger (e.g., from 0.01 to 5)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we randomly combined 10 best fit sine wave functions (Step 1) with 3 randomly</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       generated gamma parameters and extract results of the 2 best fitted gamma functions</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters of the fitted sine wave to isotope in precipitation</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>fitGamma <span class="ot">&lt;-</span> <span class="fu">fitGamma</span>(<span class="at">AP =</span> fitSineP<span class="sc">$</span>parameter<span class="sc">$</span>a,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">phiP =</span> fitSineP<span class="sc">$</span>parameter<span class="sc">$</span>phi,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">kP =</span> fitSineP<span class="sc">$</span>parameter<span class="sc">$</span>k,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">alphaRange =</span> <span class="fu">c</span>(<span class="fl">0.75</span>,<span class="fl">0.9</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">betaRange =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.3</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">simulatedDate =</span> isotopeS<span class="sc">$</span>date,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">fittedData =</span> isotopeS<span class="sc">$</span>delta_18O,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                     <span class="at">weight =</span> isotopeS<span class="sc">$</span>water_flux_mm,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nIter =</span> <span class="dv">3</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nBestIter =</span> <span class="dv">2</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nCores =</span> <span class="dv">1</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                     <span class="at">nWarmupYears =</span> <span class="dv">5</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">setSeed =</span> <span class="dv">2023</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot to see the quality of fit</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> isotopeS, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> delta_18O), <span class="at">alpha =</span> <span class="fl">0.35</span>) <span class="sc">+</span>                  <span class="co"># Observed</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> fitGamma<span class="sc">$</span>simulated, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> simulated, <span class="at">color =</span> simulation)) <span class="sc">+</span>   <span class="co"># Simulated</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(delta<span class="sc">^</span>{<span class="dv">18</span>}, <span class="st">&quot;O in streamflow (‰)&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Step 3: Now calculate the young water fraction with user defined age
+threshold (please see Eq. 13; Kirchner, (2016))</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s say we want to find the Fyw fraction with age threshold of 2 months</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tauyw <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">12</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find Fyw </span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Fywater <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(fitGamma<span class="sc">$</span>parameterSet)){</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  Fywater <span class="ot">&lt;-</span> <span class="fu">c</span>(Fywater, <span class="fu">pgamma</span>(<span class="at">q =</span> tauyw,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                               <span class="at">shape =</span> fitGamma<span class="sc">$</span>parameterSet<span class="sc">$</span>alpha[i],</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                               <span class="at">scale =</span> fitGamma<span class="sc">$</span>parameterSet<span class="sc">$</span>beta[i],</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                               <span class="at">lower.tail =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># show Fyw values</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>Fywater</span></code></pre></div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<p>Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1:
+Seasonal Tracer Cycles Quantify Young Water Fractions, but Not Mean
+Transit Times, in Spatially Heterogeneous Catchments.” Hydrology and
+Earth System Sciences 20 (1): 279–97. <a href="https://doi.org/10.5194/hess-20-279-2016" class="uri">https://doi.org/10.5194/hess-20-279-2016</a>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

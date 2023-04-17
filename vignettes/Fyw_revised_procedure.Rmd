@@ -2,7 +2,7 @@
 title: "Fyw estimation using the revised procedure"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Fyw_revised_procedure}
+  %\VignetteIndexEntry{Fyw estimation using the revised procedure}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

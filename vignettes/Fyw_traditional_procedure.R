@@ -1,47 +1,20 @@
----
-title: "Fyw estimation using traditional procedure"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Fyw estimation using traditional procedure}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, include = FALSE}
+## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-```{r setup, message=FALSE}
+## ----setup, message=FALSE-----------------------------------------------------
 # Load require packages
 library(Fyw)
 library(lubridate)
-```
 
-### 1. Overview
-This document describes how the young water fraction is calculated based on the 
-traditional procedure (Kirchner, 2016). 
-
-First we need data for this demonstration. Let's take the isotope data from the Alp catchment.
-
-```{r, message=FALSE}
+## ---- message=FALSE-----------------------------------------------------------
 # Get isotope in precipitation (P) and streamflow (S) from the the Alp catchment
 isotopeP <- subset(isotopeData, catchment == "Alp" & variable == "precipitation")
 isotopeS <- subset(isotopeData, catchment == "Alp" &  variable == "streamflow")
-```
 
-### 2. Fyw estimation using the traditional procedure
-In the traditionla procedure (Kirchner, 2016), Fyw is estimated using the following steps:
-
--   Step 1: Fit the sine wave to observed isotope in precipitation and streamflow 
-using the Iteratively Least Squares (IRLS) regression approach. The fitted sine 
-wave has the following form (please see Eq. 5; Kirchner, (2016)):
-
-$$ c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P $$
-
-```{r, message=FALSE}
+## ---- message=FALSE-----------------------------------------------------------
 #------------------------------------------------------------------------------#
 #             Fit sine wave to observed isotope in precipitation               #
 #------------------------------------------------------------------------------#
@@ -64,10 +37,8 @@ sineS <- IRLS(Y = isotopeS$delta_18O,
               X = data.frame(cos = cos(2*pi*t), sin = sin(2*pi*t)),
               pweights = isotopeS$water_flux_mm)
 
-```
 
--   Step 2: Find Fyw from the two fitted sine waves
-```{r, message=FALSE}
+## ---- message=FALSE-----------------------------------------------------------
 # Parameters of the fitted sine wave to isotope in precipitation
 kP <- as.numeric(sineP$coefficients[1])
 aP <- as.numeric(sineP$coefficients[2])
@@ -109,13 +80,4 @@ Fyw_2 <- pgamma(q = tauyw,
 # Show the results in data frame
 t(data.frame(AP = AP, phiP = phiP, kP = kP, AS = AS, phiS = phiS, kS = kS, 
              Fyw_1 = Fyw_1, Fyw_2 = Fyw_2, tauyw = tauyw))
-```
-### References
-
-Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1: Seasonal 
-Tracer Cycles Quantify Young Water Fractions, but Not Mean Transit Times, in 
-Spatially Heterogeneous Catchments.” Hydrology and Earth System Sciences 20 (1): 279–97. https://doi.org/10.5194/hess-20-279-2016.
-
-
-
 
