@@ -36,7 +36,7 @@ isotopeS <- subset(isotopeData, catchment == "Alp" &  variable == "streamflow")
 In the revised procedure, Fyw is estimated using the following steps:
 
 -   **Step 1**: Fit the sine wave to observed isotope in precipitation. The fitted sine 
-wave has the following form:
+wave has the following form (please see Eq. 4; Kirchner, (2016)):
 
 
 $$ c_P = A_P \cdot sin(2 \pi t + \varphi_P)  + k_P $$
@@ -63,10 +63,10 @@ ggplot(fitSineP$simulated)+
   theme(legend.position = "none")
 ```
 
--   Step 2: Find parameters of the gamma distribution (alpha, beta) by convoluting
-the fitted sine wave to isotope in precipitation (step 1) with the gamma functions
-and evalute the goodness-of-fit with observed isotope in streamflow. The following code
-was not run because time-consuming.
+-   Step 2: Find parameters of the gamma distribution (alpha, beta) by convolution
+of the fitted sine wave to isotope in precipitation (step 1) with the gamma functions
+(please see Eq. 4; Kirchner, (2016)) and evaluate the goodness-of-fit with observed 
+isotope in streamflow. The following code was not run because time-consuming.
 
 ```{r, message=FALSE, message=FALSE, fig.height=2.5, fig.width=7, eval = FALSE}
 # NOTE: Due to high computational demand, here I set nIter = 4 and nWarmupYears = 5
@@ -100,7 +100,7 @@ ggplot()+
   theme(legend.position = "none")
 ```
 
--   Step 3: Now calculate the young water fraction with user defined age threshold
+-   Step 3: Now calculate the young water fraction with user defined age threshold (please see Eq. 13; Kirchner, (2016))
 
 ```{r, message=FALSE, message=FALSE, fig.height=2.5, fig.width=7, eval = FALSE}
 
@@ -120,4 +120,10 @@ for (i in 1:nrow(fitGamma$parameterSet)){
 Fywater
 
 ```
+
+### References
+
+Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1: Seasonal 
+Tracer Cycles Quantify Young Water Fractions, but Not Mean Transit Times, in 
+Spatially Heterogeneous Catchments.” Hydrology and Earth System Sciences 20 (1): 279–97. https://doi.org/10.5194/hess-20-279-2016.
 

@@ -37,7 +37,7 @@ In the traditionla procedure (Kirchner, 2016), Fyw is estimated using the follow
 
 -   Step 1: Fit the sine wave to observed isotope in precipitation and streamflow 
 using the Iteratively Least Squares (IRLS) regression approach. The fitted sine 
-wave has the following form:
+wave has the following form (please see Eq. 5; Kirchner, (2016)):
 
 $$ c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P $$
 
@@ -78,7 +78,7 @@ kS <- as.numeric(sineS$coefficients[1])
 aS <- as.numeric(sineS$coefficients[2])
 bS <- as.numeric(sineS$coefficients[3])
 
-# Amplitudes of the fitted sine wave to precipitation and streamflow
+# Amplitudes of the fitted sine wave to precipitation and streamflow (please see Eq. 6; Kirchner, (2016))
 AP <- sqrt(aP^2 + bP^2)
 AS <- sqrt(aS^2 + bS^2)
 
@@ -86,31 +86,35 @@ AS <- sqrt(aS^2 + bS^2)
 phiP <- findPhi(aP = aP, bP = bP)
 phiS <- findPhi(aP = aS, bP = bS)
 
-# Phase shift
+# Phase shift (please see Eq. 11; Kirchner, (2016)))
 phiS_phiP <- phiS - phiP
 
-# Parameters of the gamma (transit time distribution)
+# Parameters of the gamma (transit time distribution) (please see Eqs. 10, 11; Kirchner, (2016))
 alphaBetaMTT <- findAlphaBetaMTT(phiS_phiP = phiS_phiP,
                                  AS = AS,
                                  AP = AP)
 
-# Age threshold of the young water fraction
+# Age threshold of the young water fraction (please see Eq. 14; Kirchner, (2016)))
 tauyw <- findtauyw(alpha = alphaBetaMTT$alpha, method = "approximation")$tauyw
 
 # Young water fraction (equals to the amplitude ratio)
 Fyw_1 <- AS/AP
 
-# Or the young water fraction equal
-Fyw_2 <- pgamma(q = tauyw, 
-                      shape = alphaBetaMTT$alpha,
-                      scale = alphaBetaMTT$beta,
-                      lower.tail = TRUE)
+# Or the young water fraction can be calculated using the lower incomplete gamma function (please see Eq. 13; Kirchner, (2016))
+Fyw_2 <- pgamma(q = tauyw,
+                shape = alphaBetaMTT$alpha,
+                scale = alphaBetaMTT$beta,
+                lower.tail = TRUE)
 
 # Show the results in data frame
 t(data.frame(AP = AP, phiP = phiP, kP = kP, AS = AS, phiS = phiS, kS = kS, 
              Fyw_1 = Fyw_1, Fyw_2 = Fyw_2, tauyw = tauyw))
 ```
+### References
 
+Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1: Seasonal 
+Tracer Cycles Quantify Young Water Fractions, but Not Mean Transit Times, in 
+Spatially Heterogeneous Catchments.” Hydrology and Earth System Sciences 20 (1): 279–97. https://doi.org/10.5194/hess-20-279-2016.
 
 
 
