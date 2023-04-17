@@ -66,9 +66,10 @@ ggplot(fitSineP$simulated)+
 
 -   Step 2: Find parameters of the gamma distribution (alpha, beta) by convoluting
 the fitted sine wave to isotope in precipitation (step 1) with the gamma functions
-and evalute the goodness-of-fit with observed isotope in streamflow.
+and evalute the goodness-of-fit with observed isotope in streamflow. The following code
+was not run because time-consuming.
 
-```{r, message=FALSE, message=FALSE, fig.height=2.5, fig.width=7}
+```{r, message=FALSE, message=FALSE, fig.height=2.5, fig.width=7, eval = FALSE}
 # NOTE: Due to high computational demand, here I set nIter = 4 and nWarmupYears = 5
 #       but to have a better fit nIter should be large (e.g, 2000), 
 #       and nWarmupYears should be large (e.g., 10) to reduce the impact of initial conditions
@@ -102,7 +103,7 @@ ggplot()+
 
 -   Step 3: Now calculate the young water fraction with user defined age threshold
 
-```{r, message=FALSE, message=FALSE, fig.height=2.5, fig.width=7}
+```{r, message=FALSE, message=FALSE, fig.height=2.5, fig.width=7, eval = FALSE}
 
 # Let's say we want to find the Fyw fraction with age threshold of 2 months
 tauyw <- 2/12 
