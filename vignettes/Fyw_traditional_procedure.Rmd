@@ -14,11 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, message=FALSE}
+```{r setup, message=FALSE}
 # Load require packages
 library(Fyw)
 library(lubridate)
-# devtools::install("path/to/package/folder")
 ```
 
 ### 1. Overview

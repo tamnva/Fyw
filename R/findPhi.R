@@ -23,8 +23,6 @@
 #' # This function should return phiP = 2*pi - 0.1
 #' @export
 
-# devtools::document() run create md
-
 findPhi <- function(aP = NULL, bP = NULL){
   phiP <- atan(-aP/bP)
 

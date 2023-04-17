@@ -23,7 +23,7 @@ Imports:
     doParallel (>= 1.0.16),
     parallel (>= 3.6.2),
     foreach (>= 1.5.1),
-    tibble (>= 3.1.6)
+    tibble (>= 3.1.6),
     ggplot2 (>= 3.4.0)
 Suggests: 
     knitr,
