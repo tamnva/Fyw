@@ -41,7 +41,7 @@ In the revised procedure, Fyw is estimated using the following steps:
 wave has the following form (please see Eq. 4; Kirchner, (2016)):
 
 
-$$ c_P = A_P \cdot sin(2 \pi t + \varphi_P)  + k_P $$
+$$ c_P = A_P \cdot sin(2 \pi t - \varphi_P)  + k_P $$
 
 ```{r, message=FALSE, fig.height=2.5, fig.width=7}
 #------------------------------------------------------------------------------#
