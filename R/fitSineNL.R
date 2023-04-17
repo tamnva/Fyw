@@ -25,7 +25,6 @@
 #' @param setSeed An integer number used for set.seed() to have a reproducible
 #' results.
 #' @importFrom stats cor
-#' @importFrom tibble as_tibble
 #' @details Fitting non linear sine function of the following form: \cr
 #' y = a * sin(2 * pi * t - phi) + k
 #' @return A list of object

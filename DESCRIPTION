@@ -1,7 +1,7 @@
 Package: Fyw
 Type: Package
 Title: Young Water Fraction Estimation
-Version: 0.2.0
+Version: 0.1.0
 Authors@R: c(person("Tam V.", "Nguyen", 
                     email = "tamnva@gmail.com", 
                     role = c("aut", "cre"),

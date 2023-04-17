@@ -1,6 +1,6 @@
 # Fyw <a href="https://github.com/tamnva/Fyw/blob/master/vignettes/icon.svg"><img src="vignettes/icon.svg" align="right" height="120" /></a>
 
-[![R-CMD-check](https://github.com/tamnva/Fyw/workflows/R-CMD-check/badge.svg)](https://github.com/tamnva/Fyw/actions) [![DOI](https://zenodo.org/badge/615738927.svg)](https://zenodo.org/badge/latestdoi/615738927)
+[![R-CMD-check](https://github.com/tamnva/Fyw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tamnva/Fyw/actions/workflows/R-CMD-check.yaml)[![DOI](https://zenodo.org/badge/615738927.svg)](https://zenodo.org/badge/latestdoi/615738927)
 
 
 ## 1. Overview
