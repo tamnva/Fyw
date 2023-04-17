@@ -7,35 +7,48 @@
 findPhi(aP = NULL, bP = NULL)
 }
 \arguments{
-\item{aP}{A scalar or vector of the shape factor of the gamma distribution}
+\item{aP}{A first scalar (see Details)}
 
-\item{bP}{A scalar or vector of the scale factor of the gamma distribution
-phiS MUST be smaller than phiP}
+\item{bP}{A second scalar (see Details)}
 }
 \value{
-A single phiP value within the range of \eqn{[0, 2\pi]}
+A single phiP value within the range of \eqn{[0, 2\pi]}.
 }
 \description{
 Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
 }
 \details{
-This function finds root of the following system of equations for \eqn{\varphi_P}
-that within the range of \eqn{[0, 2\pi]}{} given values of aP and bP \cr
-\deqn{a_P = - \sqrt{a_P^2 + b_P^2} \cdot sin(\varphi_P) = -A_p \cdot sin(\varphi_P)}{}
-\deqn{b_P = \sqrt{a_P^2 + b_P^2} \cdot cos(\varphi_P) = A_p \cdot cos(\varphi_P))}{}
+Given the sine function: \cr
+\deqn{c_P = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}{}
+
+which can be rewritten as follows \cr:
+ \deqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}{}
+
+where \cr:
+\deqn{a_P = -A_p \cdot sin(\varphi_P)}{}
+\deqn{b_P = A_p \cdot cos(\varphi_P)}{}
+
+Assuming that \eqn{a_P, b_P} are known, find \eqn{\varphi_P} within the range
+of \eqn{[0, 2\pi]}{}
 }
 \examples{
 Ap <- 2.5
 phiP <- 0.1
+
 findPhi(aP = -Ap*sin(phiP), bP = Ap*cos(phiP))
+
 # This function should return phiP = 0.1
+
 phiP <- 2*pi - 0.1
+
 findPhi(aP = -Ap*sin(phiP), bP = Ap*cos(phiP))
+
 # This function should return phiP = 2*pi - 0.1
+
 }
 \references{
-Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
-tracer cycles quantify young water fractions, but not mean transit times,
-in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
-https://doi.org/10.5194/hess-20-279-2016.
+Kirchner, J. W. (2016). Aggregation in environmental systems –
+Part 1: Seasonal tracer cycles quantify young water fractions, but not mean
+transit times, in spatially heterogeneous catchments. \emph{Hydrol. Earth Syst. Sci.},
+20, 279–297. \url{https://doi.org/10.5194/hess-20-279-2016}.
 }

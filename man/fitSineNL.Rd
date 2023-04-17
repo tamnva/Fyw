@@ -2,7 +2,7 @@
 % Please edit documentation in R/fitSineNL.R
 \name{fitSineNL}
 \alias{fitSineNL}
-\title{Fit a nonlinear sine wave function}
+\title{Fitting observed data to a non-linear sine-wave function}
 \usage{
 fitSineNL(
   observed = NULL,
@@ -18,53 +18,59 @@ fitSineNL(
 }
 \arguments{
 \item{observed}{A numeric vector containing values of the dependent variables, this
-could be measure isotope concentration in precipitation (or streamflow).}
+could be observed isotope in precipitation (or streamflow).}
 
 \item{a}{A numeric vector with positive numbers, representing the maximum and
-minimum search range for the amplitude A of cycle of isotope concentrations
-in precipitation (or streamflow).}
+minimum search range for the amplitude A of isotope cycle in precipitation
+(or streamflow).}
 
 \item{phi}{A numeric vector, representing the maximum and minimum search range
-for the phase shift of isotope concentrations in precipitation (or
-streamflow). The range must be within [0, 2*pi].}
+for the phase shift of isotope  in precipitation (or streamflow). The range
+must be within \eqn{[0, 2\pi]}.}
 
 \item{k}{A numeric vector, representing the maximum and minimum search range
 for the phase shift of the constant value in the fitted function.}
 
-\item{t}{A date (or character) vector in format format yyyy-mm-dd
-(e.g., 2020-12-31) representing the date of observed isotope concentrations}
+\item{t}{A date vector in format format yyyy-mm-dd (e.g., 2020-12-31) representing
+the date of observed isotope.}
 
 \item{nIter}{Maximum number of iterations (number of parametersets), higher
 number higher chance to have a better fit with observed data, however, longer
-computation time, defaut is 50000 (takes around 1 minute with example data)}
+computation time.}
 
 \item{nBestIter}{Number of best parameter sets. For example, when running with
 50000 parameter sets, the function will rank which parameter set give a better
 fit with observed based on square error, then save all outputs from nBestIter.}
 
-\item{weight}{A weight vector (same length with observed) when user wants to weight
+\item{weight}{A weight vector (same length with observed) when users want to weight
 with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
-input is given, all of the weight is 1 (meaning equal weight/unweight - this
+input is given, all of the weight is 1 (meaning equal weights/unweighted - this
 case for calculating the unweighted Fyw).}
 
 \item{setSeed}{An integer number used for set.seed() to have a reproducible
 results.}
 }
 \value{
-A list of object
+A list of object containing four tables: (1) a table of simulated results (e.g.,
+isotope concentration in precipitation and streamflow), (2) a table of observed data
+used for fitting, (3) a table of the goodness-of-fit (here is the weighted or unweighted
+mean square error between simulated and observed data), and (4) a table of the parameters
+of the fitted sine-wave.
 }
 \description{
-Fit a nonlinear sine wave function
+Fitting observed data to a non-linear sine-wave function
 }
 \details{
-Fitting non linear sine function of the following form: \cr
-y = a * sin(2 * pi * t - phi) + k
+The non-linear sine wave function used for fitting has the following
+form (Eq. 5; Kirchner, 2016): \cr
+
+\deqn{c = a \cdot sin(2 \pi t - \varphi_P) + k_P}{}
 }
 \examples{
-#Get isotope data in streamflow of the Alp catchment (from the example dataset)
+# Get isotope data in streamflow of the Alp catchment (from the example dataset)
 isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
 
-# Not to sine wave to observed isotope in streamflow
+# Fit a non-linear sine wave function to observed isotope data in streamflow
 fitSineS <- fitSineNL(observed = isotopeS_Alp$delta_18O,
                       a = c(0,10),
                       phi = c(0, 2*pi),
@@ -73,4 +79,10 @@ fitSineS <- fitSineNL(observed = isotopeS_Alp$delta_18O,
                       nIter = 5000,
                       nBestIter = 2,
                       weight = isotopeS_Alp$water_flux_mm)
+}
+\references{
+Kirchner, J. W. (2016). Aggregation in environmental systems –
+Part 1: Seasonal tracer cycles quantify young water fractions, but not mean
+transit times, in spatially heterogeneous catchments. \emph{Hydrol. Earth Syst. Sci.},
+20, 279–297. \url{https://doi.org/10.5194/hess-20-279-2016}.
 }
