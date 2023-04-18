@@ -3,11 +3,11 @@ Type: Package
 Title: Young Water Fraction Estimation
 Version: 0.1.0
 Authors@R: c(person("Tam V.", "Nguyen", 
-                    email = "tamnva@gmail.com", 
+                    email = "tam.nguyen@ufz.de", 
                     role = c("aut", "cre"),
                     comment = c(ORCID = "0000-0001-9111-4393"))
              )
-Maintainer: Tam V. Nguyen <tamnva@gmail.com>
+Maintainer: Tam V. Nguyen <tam.nguyen@ufz.de>
 Description: Estimating young fraction from the seasonal tracer cycles.
 License: GPL-3
 Encoding: UTF-8
