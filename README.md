@@ -22,13 +22,22 @@ library(devtools)
 install_github("tamnva/Fyw", build_vignettes = TRUE)
 ```
 
-### 3. How to use this package
+### 3. Quick start!
 
 This section describes how the young water fraction (Fyw) is calculated based on the traditional procedure (Kirchner, 2016) and revised procedure (this package). 
 
-First we need data for this demonstration. Let's take the isotope data from the Alp catchment.
+First we need to load require package (or install if you have not installed these packages)
 
-```{r, message=FALSE}
+```r
+library(Fyw)         # This package
+library(ggplot2)     # For plotting the results
+library(tibble)      # For displaying the results in tibble format
+library(lubridate)   # Convert date to decimal
+```
+
+Then, we need data for this demonstration. Let's take the isotope data from the Alp catchment.
+
+```r
 # Get isotope in precipitation (P) and streamflow (S) from the the Alp catchment
 isotopeP <- subset(isotopeData, catchment == "Alp" & variable == "precipitation")
 isotopeS <- subset(isotopeData, catchment == "Alp" &  variable == "streamflow")
@@ -53,6 +62,11 @@ sineP <- IRLS(Y = isotopeP$delta_18O,
               X = data.frame(cos = cos(2*pi*t), sin = sin(2*pi*t)),
               pweights = isotopeP$water_flux_mm)
 
+# Visualize results (fitted sine wave to isotope in precipitation)
+ggplot()+
+  geom_point(data = isotopeP, aes(x = date, y = delta_18O, color = "cP (observed)"), alpha = 0.5) + 
+  geom_line(aes(x = isotopeP$date, y = as.numeric(sineP$fitted.values), color = "cP (fitted sine-wave)"), linewidth = 0.75)
+
 #------------------------------------------------------------------------------#
 #             Fit sine wave to observed isotope in streamflow                  #
 #------------------------------------------------------------------------------#
@@ -63,7 +77,11 @@ t <- decimal_date(isotopeS$date) - trunc(decimal_date(isotopeS$date))
 sineS <- IRLS(Y = isotopeS$delta_18O,
               X = data.frame(cos = cos(2*pi*t), sin = sin(2*pi*t)),
               pweights = isotopeS$water_flux_mm)
-
+              
+# Visualize results (fitted sine wave to isotope in streamflow)
+ggplot()+
+ geom_point(data = isotopeS, aes(x = date, y = delta_18O, color = "cS (observed)"), alpha = 0.5) + 
+ geom_line(aes(x = isotopeS$date, y = as.numeric(sineS$fitted.values), color = "cS (fitted sine-wave)"), linewidth = 0.75)
 ```
 
 -   Step 2: Find Fyw from the two fitted sine waves
