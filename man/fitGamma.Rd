@@ -100,12 +100,14 @@ of the sine-wave.
 #Get isotope data in streamflow of the Alp catchment (from the example dataset)
 isotopeS_Alp <- subset(isotopeData, catchment == "Alp" & variable == "streamflow")
 
+\dontrun{
 simC <- fitGamma(AP = 1.909, phiP = 2.016, kP = -11.05995, alphaRange = c(0.01,5),
                      betaRange = c(0.01,10), simulatedDate = isotopeS_Alp$date,
                      fittedData = isotopeS_Alp$delta_18O,
                      weight = isotopeS_Alp$water_flux_mm, nIter = 8,
                      nBestIter = 3, nCores = 1,
                      nWarmupYears = 5)
+}
 }
 \references{
 Kirchner, J. W. (2016). Aggregation in environmental systems –
