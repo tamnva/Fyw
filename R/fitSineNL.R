@@ -44,7 +44,7 @@
 #' @references Kirchner, J. W. (2016). Aggregation in environmental systems –
 #' Part 1: Seasonal tracer cycles quantify young water fractions, but not mean
 #' transit times, in spatially heterogeneous catchments. \emph{Hydrol. Earth Syst. Sci.},
-#' 20, 279–297. \url{https://doi.org/10.5194/hess-20-279-2016}.
+#' 20, 279–297.
 #'
 #' @examples
 #' # Get isotope data in streamflow of the Alp catchment (from the example dataset)

@@ -41,10 +41,10 @@ of initial condition on the estimated results.}
 \item{printAll}{A logical variable, if TRUE then the results (simulated isotope
 concentration in streamflow) is printed for the entire simulation period,
 including the warm up period. If FALSE then the results is only for the
-simulatedDate}
+simulatedDate.}
 }
 \value{
-A data frame containing the date and simulated tracer concentrations
+A data frame containing the date and simulated tracer concentrations.
 }
 \description{
 Convolve the sine-wave function with the gamma distribution function
@@ -52,7 +52,7 @@ Convolve the sine-wave function with the gamma distribution function
 \details{
 This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
 + kP) with the given gamma distribution (user given the shape and scale factor)
-and return the simulated tracer concentrations in streamflow
+and return the simulated tracer concentrations in streamflow.
 }
 \examples{
 # Get tracer data in streamflow of the Alp catchment (from the example dataset)
@@ -64,6 +64,5 @@ simC <- convolSineNL(AP = 1.909, phiP = 2.016, kP = -11.05995, estAlpha = 0.802,
 \references{
 Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
 tracer cycles quantify young water fractions, but not mean transit times,
-in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
-https://doi.org/10.5194/hess-20-279-2016.
+in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297
 }

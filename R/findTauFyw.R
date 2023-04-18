@@ -10,18 +10,21 @@
 #' and Fyw using Eq. 13 (Kirchner, 2016).
 #' @param eps The minimum search distance, default value is 1e-6. In other words,
 #' if the next tauyw values changes within this range compared to the previous value
-#' the function will stop and return the next tauyw value
+#' the function will stop and return the next tauyw value.
+
 #' @importFrom stats pgamma
+
 #' @return Return a tibble object containing the age threshold of youngwater fraction
 #' (tauyw) in years. This data frame also contains input.
+
 #' @details In this function, we solve equation 13 (Kirchner et al., 2013) with
 #' given alpha (shape), beta (scale), and youngwater fraction (Fyw). The result is
 #' the age threshold of youngwater fraction (tauyw) in years
+
 #' @references
 #' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
 #' tracer cycles quantify young water fractions, but not mean transit times,
-#' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
-#' https://doi.org/10.5194/hess-20-279-2016.
+#' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297.
 #' @examples
 #' findtauyw(alpha = 1.0,
 #'           beta = 2.0,
