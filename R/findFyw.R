@@ -1,7 +1,9 @@
-#' Find the youngwater fraction (Fyw) and other associate parameters
-#' @details Estimating the youngwater fraction (Fyw) and other associate parameters
-#' e.g., beta, alpha, median transit time using combination of different inputs
-#' AP, phiP, AS, and PhiS.
+#' Find the young water fraction (Fyw) and other parameters
+#'
+#' @description
+#' Find the young water fraction based on the amplitude ratio (AS/AP) and other
+#' parameters of the transit time distribution (alpha, beta, mean transit time).
+#'
 #' @param AP A numeric vectors (or a scalar), amplitude of sine wave of isotope
 #' concentration in precipitation.
 #' @param phiP A numeric vectors (or a scalar), phase shift (radian) of sine wave
@@ -10,14 +12,14 @@
 #' concentration in streamflow. This function will check if AS < AP.
 #' @param phiS A numeric vectors (or a scalar), phase shift (radian) of sine wave
 #' of isotope concentration in streamflow. This function will automatically
-#' check if phiS > phiP
-#' @return A tibble object containing different combination of input (AP, phiP, AS,
+#' check if phiS > phiP.
+#'
+#' @return A table object containing different combination of input (AP, phiP, AS,
 #' and phiS) and the estimated Fyw, median TT, and alpha, beta of the gamma
 #' distribution. Column P and S indicates which inputs of precipitation and
 #' streamflow are used, e.g., P = 1 and S = 3 means that all parameter in this row
 #' is estimated by input AP[i], phiP[1] and AS[3], phiS[3].
-#' @seealso
-#' findAlphaBeta
+#'
 #' @examples
 #' findFyw(AP = runif(3),
 #'         phiP = runif(3),
@@ -63,7 +65,7 @@ findFyw <- function(AP = NULL,
                               AS = AS[i],
                               AP = AP[j],
                               eps = 1e-6)
-        output <- rbind(output, c(AP[j],phiP[j],AS[i],phiS[i],Fyw, temp$alpha,
+        output <- rbind(output, c(AP[j],phiP[j],AS[i],phiS[i], Fyw, temp$alpha,
                                   temp$beta, temp$meanTT,P = j, S = i))
       } else {
         print("Warning: The following input combination was not used for Fyw estimation")

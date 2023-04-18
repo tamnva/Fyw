@@ -5,34 +5,26 @@
 #'
 #' @param observed A numeric vector containing values of the dependent variables, this
 #' could be observed isotope in precipitation (or streamflow).
-#'
 #' @param a A numeric vector with positive numbers, representing the maximum and
 #' minimum search range for the amplitude A of isotope cycle in precipitation
 #' (or streamflow).
-#'
 #' @param phi A numeric vector, representing the maximum and minimum search range
 #' for the phase shift of isotope  in precipitation (or streamflow). The range
 #' must be within \eqn{[0, 2\pi]}.
-#'
 #' @param k A numeric vector, representing the maximum and minimum search range
 #' for the phase shift of the constant value in the fitted function.
-#'
 #' @param t A date vector in format format yyyy-mm-dd (e.g., 2020-12-31) representing
 #' the date of observed isotope.
-#'
 #' @param nIter Maximum number of iterations (number of parametersets), higher
 #' number higher chance to have a better fit with observed data, however, longer
 #' computation time.
-#'
 #' @param nBestIter Number of best parameter sets. For example, when running with
 #' 50000 parameter sets, the function will rank which parameter set give a better
 #' fit with observed based on square error, then save all outputs from nBestIter.
-#'
 #' @param weight A weight vector (same length with observed) when users want to weight
 #' with streamflow or precipitation (to have the weighted Fyw). Otherwise, if no
 #' input is given, all of the weight is 1 (meaning equal weights/unweighted - this
 #' case for calculating the unweighted Fyw).
-#'
 #' @param setSeed An integer number used for set.seed() to have a reproducible
 #' results.
 #'

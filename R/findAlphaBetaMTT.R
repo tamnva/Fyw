@@ -1,20 +1,25 @@
-#' Find alpha, beta, and mean TT
-#' @description Find alpha (shape) and beta (scale) factors of the gamma
-#' distriubtion using the bisection approach. Solve equations (10) and (11) in
+#' Find alpha, beta, and mean transit time
+#'
+#' @description Find alpha (shape) and beta (scale) factors of the gamma (transit time)
+#' distribution using the bisection approach. Solve equations (10) and (11) in
 #' Kirchner (2016).
-#' @param phiS_phiP Phase shift of isotope concentration in streamflow (in radian). \cr
+#'
+#' @param phiS_phiP Phase shift of isotope concentration in streamflow (in radian).
 #' phiS_phiP MUST be > 0
 #' @param AS The amplitude of the sine-wave function of isotope concentration in
 #' precipitation. AS MUST be > 0
 #' @param AP The amplitude of the sine-wave function of isotope concentration in
 #' streamflow. AP MUST be > 0
 #' @param eps The minimum search distance
-#' @return A tiblle object containing the alpha, beta, and mean transit time
+#'
+#' @return A table object containing the alpha, beta, and mean transit time.
+#'
 #' @references
-#' Kirchner, J. W. (2016). Aggregation in environmental systems – Part 1: Seasonal
-#' tracer cycles quantify young water fractions, but not mean transit times,
-#' in spatially heterogeneous catchments, Hydrol. Earth Syst. Sci., 20, 279–297,
-#' https://doi.org/10.5194/hess-20-279-2016.
+#' Kirchner, J. W. (2016). Aggregation in environmental systems –
+#' Part 1: Seasonal tracer cycles quantify young water fractions, but not mean
+#' transit times, in spatially heterogeneous catchments. \emph{Hydrol. Earth Syst. Sci.},
+#' 20, 279–297. \url{https://doi.org/10.5194/hess-20-279-2016}.
+#'
 #' @examples
 #' result <- findAlphaBetaMTT(phiS_phiP = pi,
 #'                         AS = 1.0,

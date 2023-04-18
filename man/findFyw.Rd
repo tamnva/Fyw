@@ -2,7 +2,7 @@
 % Please edit documentation in R/findFyw.R
 \name{findFyw}
 \alias{findFyw}
-\title{Find the youngwater fraction (Fyw) and other associate parameters}
+\title{Find the young water fraction (Fyw) and other parameters}
 \usage{
 findFyw(AP = NULL, phiP = NULL, AS = NULL, phiS = NULL)
 }
@@ -18,29 +18,22 @@ concentration in streamflow. This function will check if AS < AP.}
 
 \item{phiS}{A numeric vectors (or a scalar), phase shift (radian) of sine wave
 of isotope concentration in streamflow. This function will automatically
-check if phiS > phiP}
+check if phiS > phiP.}
 }
 \value{
-A tibble object containing different combination of input (AP, phiP, AS,
+A table object containing different combination of input (AP, phiP, AS,
 and phiS) and the estimated Fyw, median TT, and alpha, beta of the gamma
 distribution. Column P and S indicates which inputs of precipitation and
 streamflow are used, e.g., P = 1 and S = 3 means that all parameter in this row
 is estimated by input AP[i], phiP[1] and AS[3], phiS[3].
 }
 \description{
-Find the youngwater fraction (Fyw) and other associate parameters
-}
-\details{
-Estimating the youngwater fraction (Fyw) and other associate parameters
-e.g., beta, alpha, median transit time using combination of different inputs
-AP, phiP, AS, and PhiS.
+Find the young water fraction based on the amplitude ratio (AS/AP) and other
+parameters of the transit time distribution (alpha, beta, mean transit time).
 }
 \examples{
 findFyw(AP = runif(3),
         phiP = runif(3),
         AS = runif(4),
         phiS = runif(4))
-}
-\seealso{
-findAlphaBeta
 }

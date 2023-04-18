@@ -33,7 +33,7 @@ isotopeS <- subset(isotopeData, catchment == "Alp" &  variable == "streamflow")
 ```
 
 ### 2. Fyw estimation using the traditional procedure
-In the traditionla procedure (Kirchner, 2016), Fyw is estimated using the following steps:
+In the traditional procedure (Kirchner, 2016), Fyw is estimated using the following steps:
 
 -   Step 1: Fit the sine wave to observed isotope in precipitation and streamflow 
 using the Iteratively Least Squares (IRLS) regression approach. The fitted sine 

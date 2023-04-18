@@ -7,9 +7,9 @@
 findPhi(aP = NULL, bP = NULL)
 }
 \arguments{
-\item{aP}{A first scalar (see Details)}
+\item{aP}{A first scalar (see Details).}
 
-\item{bP}{A second scalar (see Details)}
+\item{bP}{A second scalar (see Details).}
 }
 \value{
 A single phiP value within the range of \eqn{[0, 2\pi]}.
@@ -20,16 +20,13 @@ Find \eqn{\varphi} within the range of \eqn{[0, 2\pi]}
 \details{
 Given the sine function (e.g., Eq. 4 in Kirchner, (2016)): \cr
 \deqn{c_P = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}{}
-
 which can be rewritten as follows (e.g., Eq. 5 in Kirchner, (2016)): \cr
  \deqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}{}
-
 where: \cr
 \deqn{a_P = -A_p \cdot sin(\varphi_P)}{}
 \deqn{b_P = A_p \cdot cos(\varphi_P)}{}
-
 Assuming that \eqn{a_P, b_P} are known, find \eqn{\varphi_P} within the range
-of \eqn{[0, 2\pi]}{}
+of \eqn{[0, 2\pi]}{}.
 }
 \examples{
 Ap <- 2.5
