@@ -161,7 +161,7 @@ ggplot(fitSineP$simulated)+
   theme(legend.position = "none")
 ```
 
--   Step 2: Find parameters of the gamma distribution (alpha, beta) by convolution of the fitted sine wave to isotope in precipitation (step 1) with the gamma functions (please see Eq. 4; Kirchner, (2016)) and evaluate the goodness-of-fit with observed isotope in streamflow. The following code was not run because time-consuming.
+-   Step 2: Find parameters of the gamma distribution (alpha, beta) by convolution of the fitted sine wave to isotope in precipitation (step 1) with the gamma functions (please see Eq. 4; Kirchner, (2016)) and evaluate the goodness-of-fit with observed isotope in streamflow.
 
 ```r
 # NOTE: This require very high computational demand
