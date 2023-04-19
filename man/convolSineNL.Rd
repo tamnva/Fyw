@@ -61,7 +61,7 @@ where \eqn{c_P(t)} in the following sine-wave form: \cr
 
 and the gamma distribution is:
 
-\deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-t/\beta}}{}
+\deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-\tau/\beta}}{}
 }
 \examples{
 # Get tracer data in streamflow of the Alp catchment (from the example dataset)

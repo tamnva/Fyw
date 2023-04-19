@@ -87,7 +87,7 @@ where \eqn{c_P(t)} in the following sine-wave form: \cr
 
 and the gamma distribution is:
 
-\deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-t/\beta}}{}
+\deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-\tau/\beta}}{}
 
 In this convolution, parameters of the sine-wave (which is the fitted sine-wave
 to isotope in precipitation) are given as input to this convolution. Here, a number

@@ -38,7 +38,7 @@
 #'
 #' and the gamma distribution is:
 #'
-#' \deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-t/\beta}}{}
+#' \deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-\tau/\beta}}{}
 #'
 
 #' @references
