@@ -7,9 +7,11 @@
 findPhi(aP = NULL, bP = NULL)
 }
 \arguments{
-\item{aP}{A first scalar (see Details).}
+\item{aP}{The slope coefficient of the linear sine wave: \cr
+\eqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}.}
 
-\item{bP}{A second scalar (see Details).}
+\item{bP}{The slope coefficient of the linear sine wave: \cr
+\eqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}.}
 }
 \value{
 A single phiP value within the range of \eqn{[0, 2\pi]}.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/convolSineNL.R
 \name{convolSineNL}
 \alias{convolSineNL}
-\title{Convolve the sine-wave function with the gamma distribution function}
+\title{Convolution of the sine function with the gamma function}
 \usage{
 convolSineNL(
   AP = NULL,
@@ -16,14 +16,14 @@ convolSineNL(
 )
 }
 \arguments{
-\item{AP}{Amplitude of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
-tracer concentration in precipitation.}
+\item{AP}{Amplitude of the sine wave describing isotope in precipitation: \cr
+\eqn{c_P = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}}
 
-\item{phiP}{Phase shift of the sine wave (cP = AP*sin(2*pi*t - phiP) + kP) of
-tracerconcentration in precipitation.}
+\item{phiP}{Phase shift of the sine wave describing isotope in precipitation
+(please see the above equation).}
 
-\item{kP}{The constant factor of sine wave (cP = AP*sin(2*pi*t - phiP) + kP)
-of tracer concentration in precipitation.}
+\item{kP}{The constant factor of sine wave describing isotope in precipitation
+(please see the above equation).}
 
 \item{estAlpha}{The 'user' estimated alpha (shape) of the gamma distribution
 function used for the convolution approach}
@@ -47,12 +47,21 @@ simulatedDate.}
 A data frame containing the date and simulated tracer concentrations.
 }
 \description{
-Convolve the sine-wave function with the gamma distribution function
+Convolution of the sine-wave function describing isotope in precipitation with
+the gamma (transit time) distribution function.
 }
 \details{
-This function convolute the input sine wave (cP = AP*sin(2*pi*t - phiP)
-+ kP) with the given gamma distribution (user given the shape and scale factor)
-and return the simulated tracer concentrations in streamflow.
+This function perform the following convolution (please see Eq. 1 from Kirchner (2016)):
+
+\deqn{c_S(t) = \int_{0}^{\infty} h(\tau) \cdot c_P(t - \tau) d\tau }{}
+
+where \eqn{c_P(t)} in the following sine-wave form: \cr
+
+ \deqn{c_P(t) = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}{}
+
+and the gamma distribution is:
+
+\deqn{h(\tau) =  \frac{\tau^{\alpha - 1}}{\beta^{\alpha} \Gamma (\alpha)} e^ {-t/\beta}}{}
 }
 \examples{
 # Get tracer data in streamflow of the Alp catchment (from the example dataset)

@@ -1,7 +1,9 @@
 #' Find \eqn{\varphi}
 #'
-#' @param aP A first scalar (see Details).
-#' @param bP A second scalar (see Details).
+#' @param aP The slope coefficient of the linear sine wave: \cr
+#' \eqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}.
+#' @param bP The slope coefficient of the linear sine wave: \cr
+#' \eqn{c_P = a_P \cdot cos(2 \pi t) + b_P \cdot sin(2 \pi t) + k_P}.
 #'
 #' @return A single phiP value within the range of \eqn{[0, 2\pi]}.
 #'

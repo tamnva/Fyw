@@ -81,9 +81,9 @@ isotope in stream (please see Eq. 1 from Kirchner (2016)):
 
 \deqn{c_S(t) = \int_{0}^{\infty} h(\tau) \cdot c_P(t - \tau) d\tau }{}
 
-where \eqn{c_P} in the following sine-wave form: \cr
+where \eqn{c_P(t)} in the following sine-wave form: \cr
 
- \deqn{c_P = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}{}
+ \deqn{c_P(t) = A_P \cdot sin(2 \pi t - \varphi_P) + k_P}{}
 
 and the gamma distribution is:
 
