@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Phase and phase shift</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Phase and phase shift</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load require packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;ggplot2&#39; was built under R version 4.2.3</span></span></code></pre></div>
+<div id="overview" class="section level3">
+<h3>1. Overview</h3>
+<p>This document explain how to calculate the phase shift. Let’s assume
+that the sine wave describing isotope cycles in precipitation, <span class="math inline">\(c_P(t)\)</span>, and streamflow , <span class="math inline">\(c_S(t)\)</span>, have the following form:</p>
+<p><span class="math display">\[ c_P(t) = A_P \cdot sin(2 \pi t -
+\varphi_P ) +  k_P \]</span></p>
+<p><span class="math display">\[ c_S(t) = A_S \cdot sin(2 \pi t -
+\varphi_S ) +  k_S \]</span></p>
+<p>The phase shift is:</p>
+<p><span class="math display">\[ \varphi_P - \varphi_S \]</span></p>
+</div>
+<div id="example-1" class="section level3">
+<h3>2. Example 1:</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate time vector from 0 to 1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># t = [0,1] corresponding to year [0,1] and phase [0,2pi]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="fl">0.05</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume that the phase of precipitation and streamflow is pi/2 and pi, repsectively</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>phiP <span class="ot">&lt;-</span> pi</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>phiS <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>pi <span class="sc">+</span> pi<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># The phase shift in this case is</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>phiS <span class="sc">-</span> phiP</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4.712389</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume that the amplitude of precipitation is 2 and of streamflow is 1.5</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>AP <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>AS <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Assume that kP = kS = -10</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>kP <span class="ot">=</span> <span class="sc">-</span><span class="dv">10</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>kS <span class="ot">=</span> <span class="sc">-</span><span class="dv">10</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Now get the sine wave of precipitation and streamflow</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>cP <span class="ot">&lt;-</span> AP <span class="sc">*</span> <span class="fu">sin</span> (<span class="dv">2</span><span class="sc">*</span>pi <span class="sc">*</span> t <span class="sc">-</span> phiP) <span class="sc">+</span> kP</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>cS <span class="ot">&lt;-</span> AS <span class="sc">*</span> <span class="fu">sin</span> (<span class="dv">2</span><span class="sc">*</span>pi <span class="sc">*</span> t <span class="sc">-</span> phiS) <span class="sc">+</span> kS</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Assemble the data for plot</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> t, <span class="at">cP =</span> cP, <span class="at">cS =</span> cS)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">t =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.25</span>), <span class="at">phaseShift =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>,<span class="sc">-</span><span class="dv">10</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot to see the phase shift</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> cP, <span class="at">color =</span> <span class="st">&quot;cP&quot;</span>), <span class="at">linewidth =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> cS, <span class="at">color =</span> <span class="st">&quot;cS&quot;</span>), <span class="at">linewidth =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ps, <span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> phaseShift, <span class="at">color =</span> <span class="st">&quot;phase shift&quot;</span>), <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">&quot;time (year)&quot;</span>, </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>. <span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>pi, <span class="fu">expression</span>(<span class="fu">paste</span>(varphi, <span class="st">&quot; (rad)&quot;</span> )), </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="fl">0.5</span>)<span class="sc">*</span><span class="dv">2</span><span class="sc">*</span>pi,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="dv">0</span>, </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                                                    <span class="fu">expression</span>(<span class="fu">paste</span>(pi)), </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                                                    <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;2&quot;</span>,pi)), </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>                                                    <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;3&quot;</span>,pi)), </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>                                                    <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;4&quot;</span>,pi)))</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;   &quot;</span>, c[P], <span class="st">&quot; (&quot;</span>,varphi[P], <span class="st">&quot; = &quot;</span>, pi ,<span class="st">&quot;)&quot;</span>)), </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;   &quot;</span>, c[S], <span class="st">&quot; (&quot;</span>,varphi[S], <span class="st">&quot; = 2.5&quot;</span>, pi ,<span class="st">&quot;)&quot;</span>)), </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;   &quot;</span>, varphi[S], <span class="st">&quot; - &quot;</span>, varphi[P], <span class="st">&quot; = 1.5&quot;</span>, pi))),</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(c[P], <span class="st">&quot;  and  &quot;</span>, c[S])), <span class="at">color =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<p>Kirchner, J. W. 2016. “Aggregation in Environmental Systems – Part 1:
+Seasonal Tracer Cycles Quantify Young Water Fractions, but Not Mean
+Transit Times, in Spatially Heterogeneous Catchments.” Hydrology and
+Earth System Sciences 20 (1): 279–97. <a href="https://doi.org/10.5194/hess-20-279-2016" class="uri">https://doi.org/10.5194/hess-20-279-2016</a>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

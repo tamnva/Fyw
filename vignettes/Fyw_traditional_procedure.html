@@ -415,43 +415,42 @@ Kirchner, (2016)):</li>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>AP <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(aP<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> bP<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>AS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(aS<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> bS<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Phase </span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>phiP <span class="ot">&lt;-</span> <span class="fu">findPhi</span>(<span class="at">aP =</span> aP, <span class="at">bP =</span> bP)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>phiS <span class="ot">&lt;-</span> <span class="fu">findPhi</span>(<span class="at">aP =</span> aS, <span class="at">bP =</span> bS)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Phase shift (please see Eq. 11; Kirchner, (2016)))</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>phiS_phiP <span class="ot">&lt;-</span> phiS <span class="sc">-</span> phiP</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters of the gamma (transit time distribution) (please see Eqs. 10, 11; Kirchner, (2016))</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>alphaBetaMTT <span class="ot">&lt;-</span> <span class="fu">findAlphaBetaMTT</span>(<span class="at">phiS_phiP =</span> phiS_phiP,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">AS =</span> AS,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">AP =</span> AP)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Age threshold of the young water fraction (please see Eq. 14; Kirchner, (2016)))</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>tauyw <span class="ot">&lt;-</span> <span class="fu">findtauyw</span>(<span class="at">alpha =</span> alphaBetaMTT<span class="sc">$</span>alpha, <span class="at">method =</span> <span class="st">&quot;approximation&quot;</span>)<span class="sc">$</span>tauyw</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Young water fraction (equals to the amplitude ratio)</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>Fyw_1 <span class="ot">&lt;-</span> AS<span class="sc">/</span>AP</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Or the young water fraction can be calculated using the lower incomplete gamma function (please see Eq. 13; Kirchner, (2016))</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>Fyw_2 <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="at">q =</span> tauyw,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                <span class="at">shape =</span> alphaBetaMTT<span class="sc">$</span>alpha,</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                <span class="at">scale =</span> alphaBetaMTT<span class="sc">$</span>beta,</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>                <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the results in data frame</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">data.frame</span>(<span class="at">AP =</span> AP, <span class="at">phiP =</span> phiP, <span class="at">kP =</span> kP, <span class="at">AS =</span> AS, <span class="at">phiS =</span> phiS, <span class="at">kS =</span> kS, </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>             <span class="at">Fyw_1 =</span> Fyw_1, <span class="at">Fyw_2 =</span> Fyw_2, <span class="at">tauyw =</span> tauyw))</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              [,1]</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AP      2.1860709</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; phiP    1.9465085</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; kP    -10.5811545</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AS      0.9712444</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; phiS    2.6981767</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; kS    -11.5071844</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fyw_1   0.4442877</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fyw_2   0.4541171</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tauyw   0.1510393</span></span></code></pre></div>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Phase and phase shift</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>phi <span class="ot">&lt;-</span> <span class="fu">findPhiPhaseShift</span>(<span class="at">aP =</span> aP, <span class="at">bP =</span> bP, <span class="at">aS =</span> aS, <span class="at">bS =</span> bS)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>phiP <span class="ot">&lt;-</span> phi<span class="sc">$</span>phiP</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>phiS <span class="ot">&lt;-</span> phi<span class="sc">$</span>phiS</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>phiS_phiP <span class="ot">&lt;-</span> phi<span class="sc">$</span>phiS_phiP</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters of the gamma (transit time distribution) (please see Eqs. 10, 11; Kirchner, (2016))</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>alphaBetaMTT <span class="ot">&lt;-</span> <span class="fu">findAlphaBetaMTT</span>(<span class="at">phiS_phiP =</span> phiS_phiP,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">AS =</span> AS,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">AP =</span> AP)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Age threshold of the young water fraction (please see Eq. 14; Kirchner, (2016)))</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>tauyw <span class="ot">&lt;-</span> <span class="fu">findtauyw</span>(<span class="at">alpha =</span> alphaBetaMTT<span class="sc">$</span>alpha, <span class="at">method =</span> <span class="st">&quot;approximation&quot;</span>)<span class="sc">$</span>tauyw</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Young water fraction (equals to the amplitude ratio)</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>Fyw_1 <span class="ot">&lt;-</span> AS<span class="sc">/</span>AP</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Or the young water fraction can be calculated using the lower incomplete gamma function (please see Eq. 13; Kirchner, (2016))</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>Fyw_2 <span class="ot">&lt;-</span> <span class="fu">pgamma</span>(<span class="at">q =</span> tauyw,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>                <span class="at">shape =</span> alphaBetaMTT<span class="sc">$</span>alpha,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                <span class="at">scale =</span> alphaBetaMTT<span class="sc">$</span>beta,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the results in data frame</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">data.frame</span>(<span class="at">AP =</span> AP, <span class="at">phiP =</span> phiP, <span class="at">kP =</span> kP, <span class="at">AS =</span> AS, <span class="at">phiS =</span> phiS, <span class="at">kS =</span> kS, </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>             <span class="at">Fyw_1 =</span> Fyw_1, <span class="at">Fyw_2 =</span> Fyw_2, <span class="at">tauyw =</span> tauyw))</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              [,1]</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AP      2.1860709</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; phiP    1.9465085</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; kP    -10.5811545</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; AS      0.9712444</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; phiS    2.6981767</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; kS    -11.5071844</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fyw_1   0.4442877</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Fyw_2   0.4541171</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tauyw   0.1510393</span></span></code></pre></div>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>

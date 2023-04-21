@@ -3,9 +3,10 @@
 \docType{data}
 \name{isotopeData}
 \alias{isotopeData}
-\title{Isotope \eqn{(\delta^{18}O)} data}
+\title{Isotope and hydro-meterological data}
 \description{
-Isotope \eqn{(\delta^{18}O)} data
+\eqn{(\delta^{18}O)} data in precipitation and streamflow as well
+as precipitation and streamflow volume.
 }
 \details{
 Isotope \eqn{(\delta^{18}O)} data in precipitation and streamflow in

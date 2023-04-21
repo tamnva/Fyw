@@ -92,12 +92,11 @@ bS <- as.numeric(sineS$coefficients[3])
 AP <- sqrt(aP^2 + bP^2)
 AS <- sqrt(aS^2 + bS^2)
 
-# Phase 
-phiP <- findPhi(aP = aP, bP = bP)
-phiS <- findPhi(aP = aS, bP = bS)
-
-# Phase shift (please see Eq. 11; Kirchner, (2016)))
-phiS_phiP <- phiS - phiP
+# Phase and phase shift
+phi <- findPhiPhaseShift(aP = aP, bP = bP, aS = aS, bS = bS)
+phiP <- phi$phiP
+phiS <- phi$phiS
+phiS_phiP <- phi$phiS_phiP
 
 # Parameters of the gamma (transit time distribution) (please see Eqs. 10, 11; Kirchner, (2016))
 alphaBetaMTT <- findAlphaBetaMTT(phiS_phiP = phiS_phiP,
