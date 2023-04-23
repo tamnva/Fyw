@@ -16,13 +16,15 @@ knitr::opts_chunk$set(
 
 ```{r setup, message=FALSE, eval = TRUE}
 # Load require packages
-library(ggplot2)
+library(Fyw)
+
+# library(ggplot2)
 ```
 
 ### 1. Overview
 This document explain how to calculate the phase shift. Let's assume that the sine
-wave describing isotope cycles in precipitation, $c_P(t)$, and streamflow , $c_S(t)$, have the 
-following form:
+wave describing isotope cycles in precipitation, $c_P(t)$, and streamflow, $c_S(t)$, 
+have the following form:
 
 $$ c_P(t) = A_P \cdot sin(2 \pi t - \varphi_P ) +  k_P $$
 
@@ -33,12 +35,12 @@ The phase shift is:
 $$ \varphi_P - \varphi_S $$
 
 ### 2. Example 1: 
-```{r, message=FALSE, eval = TRUE, fig.width=7, fig.height=3}
+```{r, message=FALSE, eval = FALSE, fig.width=7, fig.height=3}
 # Generate time vector from 0 to 1
 # t = [0,1] corresponding to year [0,1] and phase [0,2pi]
 t <- seq(0,2,0.05)
 
-# Assume that the phase of precipitation and streamflow is pi/2 and pi, repsectively
+# Assume that the phase of precipitation and streamflow is pi/2 and pi, respectively
 phiP <- pi
 phiS <- 2*pi + pi/2
 
